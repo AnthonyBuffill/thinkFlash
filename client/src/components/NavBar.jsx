@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom"
 import '../assets/css/navbar.css'
 
@@ -8,6 +8,28 @@ export default function Navbar() {
     const menuClose = '../assets/tfcloseMenu.png'
     const [menuBtn, setMenuButton]  = useState(menuOpen)
     const [showMenu, setShowMenu]  = useState(false)
+    const maxSmallScreen = 459;
+    useEffect(() => {
+        const handleResize = () => {
+
+            if(window.innerWidth >= maxSmallScreen){
+                setShowMenu(true)
+            }else{
+                setShowMenu(false)
+            }
+        };
+    
+        // Initial check
+        handleResize();
+    
+        // Event listener for window resize
+        window.addEventListener('resize', handleResize);
+    
+        // Cleanup
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, [])
 
     const handleMenuToggle = () => {
        
@@ -21,6 +43,7 @@ export default function Navbar() {
 
 
     }
+
     return (
         <>
         <nav className="nav-container">
@@ -30,7 +53,7 @@ export default function Navbar() {
                 </button>
                 <div>Logo</div>
             </section>
-            {showMenu &&
+           {showMenu  &&
             <section className="nav-links-container">
                 <button>
                     <Link to={'/'}>ABOUT</Link>

@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    background-color: var(    --beigeColor);
+    border: var(--brownColor) 2px solid;
 }
 
 .logo-container{
@@ -10,7 +12,6 @@
     padding: 20px 8px;
     align-items: center;
     background-color: var(--beigeColor);
-    border: var(--brownColor) 3px solid;
 }
 .menu-btn{
     border: none;
@@ -45,4 +46,22 @@
     text-decoration: none;
     color: var(--brownColor);
     font-size: 24px;
+  }
+
+  @media screen and (min-width: 460px) {
+    .nav-container{
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 1100px;
+        border: none;
+        border-bottom: var(--brownColor) 3px solid;
+    }
+    .menu-btn{
+        display: none;
+    }
+    .nav-links-container{
+        flex-direction: row;
+        max-width: 700px;
+        border: none;
+    }
   }

@@ -6,3 +6,6 @@
     --redColor: #FB4D3D;
     --brownColor: #210203;
 }
+.body{
+    background-color: var(--beigeColor);
+}
