@@ -1,0 +1,48 @@
+.nav-container{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.logo-container{
+    display: flex;
+    gap: 30px;
+    padding: 20px 8px;
+    align-items: center;
+    background-color: var(--beigeColor);
+    border: var(--brownColor) 3px solid;
+}
+.menu-btn{
+    border: none;
+    background: none;
+}
+.menu-btn img{
+    max-width: 100px;
+    height: 80px;
+}
+.nav-links-container{
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap:20px;
+    border: black 1px solid;
+    max-width: 300px;
+    background-color: var(--beigeColor);
+}
+.nav-links-container button{
+    max-width: 200px;
+    min-height: 50px;
+    border-radius: 10px;
+    padding: 5px;
+}
+.nav-links-container > :nth-child(even) {
+    background-color: var(--yellowColor);
+  }
+.nav-links-container > :nth-child(odd) {
+    background-color: var(--blueColor);
+  }
+  .nav-links-container a{
+    text-decoration: none;
+    color: var(--brownColor);
+    font-size: 24px;
+  }
