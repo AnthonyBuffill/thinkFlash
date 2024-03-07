@@ -1,0 +1,18 @@
+{
+  "name": "thinkflash",
+  "version": "1.0.0",
+  "description": "FlashCard application powered by AI",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "develop": "concurrently \" server && npm run watch\" \"cd client && npm run dev\"",
+    "install": "cd server && npm i && cd ..client && npm i",
+    "build": "cd client && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
