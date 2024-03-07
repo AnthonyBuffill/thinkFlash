@@ -7,7 +7,11 @@ import AboutPage from './pages/AboutPage.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
-import './index.css'
+import NewDeckPage from './pages/NewDeckPage.jsx'
+import PlayPage from './pages/PlayPage.jsx'
+// styles
+import './assets/css/index.css'
+import './assets/css/resets.css'
 
 
 const router = (
@@ -16,6 +20,8 @@ const router = (
       <Route index element={<AboutPage />} />
       <Route path="dashboard" element={<DashboardPage/>} />
       <Route path="dashboard/:deckId" element={<DashboardPage/>} />
+      <Route path="newDeck" element={<NewDeckPage/>} />
+      <Route path="play" element={<PlayPage/>} />
       <Route path="login" element={<LoginPage />} />
       <Route path="signup" element={<SignupPage/>} />
     </Route>
