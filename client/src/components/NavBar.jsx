@@ -8,7 +8,7 @@ export default function Navbar() {
     const menuClose = '../assets/tfcloseMenu.png'
     const [menuBtn, setMenuButton]  = useState(menuOpen)
     const [showMenu, setShowMenu]  = useState(false)
-    const maxSmallScreen = 459;
+    const maxSmallScreen = 600;
     useEffect(() => {
         const handleResize = () => {
 
