@@ -62,7 +62,7 @@
     .nav-container{
         flex-direction: row;
         justify-content: space-between;
-        max-width: 1100px;
+        max-width: 1140px;
         border: none;
         border-bottom: var(--brownColor) 3px solid;
     }

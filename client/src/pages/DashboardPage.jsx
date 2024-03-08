@@ -6,7 +6,7 @@ export default function DashboardPage() {
         <main>
             <section className="dash-nav-container">
                 <button>
-                    <a href="/addCard">+ add card</a>
+                    <a href="/newDeck">+ create new</a>
                 </button>
             </section>
             ------------------------
