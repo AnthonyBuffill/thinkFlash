@@ -29,6 +29,7 @@ type Query {
   user(username: String!): User
   decks(username: String): [Deck]
   deck(deckId: ID!): Deck
+  createCards(title: String!, front: String!, back: String!, cardCount:Int!): String
 }
 type Mutation {
   addUser(username: String!, email: String!, password: String!): Auth
