@@ -1,10 +1,37 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App.jsx'
-import './index.css'
+//pages
+import AboutPage from './pages/AboutPage.jsx'
+import DashboardPage from './pages/DashboardPage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
+import SignupPage from './pages/SignupPage.jsx'
+import NewDeckPage from './pages/NewDeckPage.jsx'
+import PlayPage from './pages/PlayPage.jsx'
+// styles
+import './assets/css/index.css'
+import './assets/css/resets.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+
+const router = (
+  <Routes>
+    <Route path="/" element={<App />}>
+      <Route index element={<AboutPage />} />
+      <Route path="dashboard" element={<DashboardPage/>} />
+      <Route path="dashboard/:deckId" element={<DashboardPage/>} />
+      <Route path="newDeck" element={<NewDeckPage/>} />
+      <Route path="play" element={<PlayPage/>} />
+      <Route path="login" element={<LoginPage />} />
+      <Route path="signup" element={<SignupPage/>} />
+    </Route>
+  </Routes>
+);
+
+
+createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <Router>{router}</Router>
+  </React.StrictMode>
+);
+
