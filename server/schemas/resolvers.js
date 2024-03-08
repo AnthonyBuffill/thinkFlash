@@ -1,6 +1,8 @@
 const { User, Deck, Card } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
-
+const {
+  createCards,
+} = require('../controller/openAIController');
  
  
  
@@ -20,6 +22,10 @@ const { signToken, AuthenticationError } = require('../utils/auth');
       },
       deck: async (parent, { deckId }) => {
         return Deck.findOne({ _id: deckId });
+      },
+      createCards: async(parent, {title, front, back, cardCount}) => {
+        const value = await createCards(title, front, back, cardCount);
+        return JSON.stringify(value);
       },
     }, 
     Mutation: {
