@@ -17,7 +17,8 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    minlength: 5,
+    minlength: 8,
+    match: [/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,}$/, 'Must contain one uppercase, one lowercase, one number, one special character'],
   },
   decks: [
     {
