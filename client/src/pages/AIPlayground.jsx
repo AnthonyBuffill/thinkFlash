@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { QUERY_CREATECARDS } from "../utils/queries";
+import { useLazyQuery } from "@apollo/client";
 
 export default function AIPlayground(){
   const [formData, setFormData] = useState({
@@ -7,6 +9,13 @@ export default function AIPlayground(){
     back:'',
     cardCount:0
   });
+  const [getCards, { loading, error, data }] = useLazyQuery(QUERY_CREATECARDS,{
+    fetchPolicy: 'network-only'
+  });
+  if(error)
+    console.log(error);
+  const flashCards = data?JSON.parse(data.createCards)['flashcards'] : null;
+  
   const handleChange = (event) =>{
     let { name, value} = event.target;
     if(name === "cardCount"){
@@ -19,36 +28,44 @@ export default function AIPlayground(){
   };
   const handleSubmit = async (event)=>{
     event.preventDefault();
+    getCards({variables: { 
+      title: formData.title, 
+      front:formData.front, 
+      back: formData.back,
+      cardCount: formData.cardCount
+    }});
+    // try{
+    //   const response = await fetch('/api/openai/createFlashCards', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(formData)
+    //   });
 
-    try{
-      const response = await fetch('/api/openai/createFlashCards', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-
-      const responseData = await response.json();
-      setFlashCards({ title:formData.title, cards:responseData.flashcards});
-      console.log(flashCards);
-      console.log('Response: ', responseData.flashcards);
-    }catch(error){
-      console.log('error', error);
-    }
+    //   const responseData = await response.json();
+    //   setFlashCards({ title:formData.title, cards:responseData.flashcards});
+    //   console.log(flashCards);
+    //   console.log('Response: ', responseData.flashcards);
+    // }catch(error){
+    //   console.log('error', error);
+    // }
   }
-  const [flashCards, setFlashCards] = useState({
-    title:'',
-    cards:[{}]
-  });
+  // const [flashCards, setFlashCards] = useState({
+  //   title:'',
+  //   cards:[{}]
+  // });
 
   return (
     <div>
-      {flashCards && flashCards.cards.length > 0 && (
+      { loading && (
+        <h1>loading</h1>
+      )}
+      {flashCards && flashCards.length > 0 && (
         <div>
           <h4>{flashCards.title} Deck</h4>
           <div style={styles.cardContainer}>
-          {flashCards.cards.map((jsonData, index) => (
+          {flashCards.map((jsonData, index) => (
           <div style={styles.card} key={index}>
             <p>{jsonData.front}</p>
             <hr></hr>
