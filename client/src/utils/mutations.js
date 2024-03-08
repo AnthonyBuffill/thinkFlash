@@ -12,16 +12,6 @@ export const ADD_USER = gql`
   }
 `;
 
-export const ADD_DECK = gql`
-  mutation addDeck($userId: ID!, $skill: String!) {
-    addDeck(userId: $userId, skill: $skill) {
-      _id
-      username
-      skills
-    }
-  }
-`;
-
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -33,3 +23,68 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const ADD_DECK = gql`
+  mutation addDeck($title: String!, $description: String!) {
+    addDeck(title: $title, description: $description) {
+      _id
+      title
+      description
+      cards {
+        _id
+        frontText
+        backText
+        createdAt
+      }
+    }
+  }
+`;
+
+export const DELETE_DECK = gql`
+  mutation deleteDeck($deckId: ID!) {
+    removeDeck(deckId: $deckId) {
+      _id
+      title
+      description
+    }
+  }
+`;
+
+export const DELETE_CARD = gql`
+  mutation deleteCard($deckId: ID!, $cardId: ID!) {
+    removeCard(deckId: $deckId, cardId: $cardId) {
+      _id
+      title
+      cards {
+        _id
+        frontText
+        backText
+        createdAt
+      }
+    }
+  }
+`;
+
+export const ADD_CARD = gql`
+  mutation addCard($deckId: ID!, $frontText: String!, $backText: String!) {
+    addCard(deckId: $deckId, frontText: $frontText, backText: $backText) {
+      _id
+      frontText
+      backText
+      createdAt
+    }
+  }
+`;
+
+export const UPDATE_CARD = gql`
+  mutation updateCard($cardId: ID!, $frontText: String, $backText: String) {
+    updateCard(cardId: $cardId, frontText: $frontText, backText: $backText) {
+      _id
+      frontText
+      backText
+      createdAt
+    }
+  }
+`;
+
+
