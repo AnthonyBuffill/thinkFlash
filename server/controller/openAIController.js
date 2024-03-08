@@ -12,7 +12,7 @@ module.exports = {
       if(!req.body.title || !req.body.front || !req.body.back || !req.body.cardCount){
         return res.status(400).json({message: "missing info for deck creation."})
       }
-      const systemMessage = `You are a teacher who makes flash card decks for students, you return flash cards with JSON parmeters (Front:string, back:string)`
+      const systemMessage = `You are a teacher who makes flash card decks for students, you return flash cards with JSON parmeters (front:string, back:string)`
       const userMessage = `Using '${req.body.front}' as a front side card example and '${req.body.back}' as back side card example.
 Create for me ${req.body.cardCount} flash cards and return them
 Make sure all cards fit under the classification of '${req.body.title}'.`;
