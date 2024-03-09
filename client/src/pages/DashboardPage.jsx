@@ -1,4 +1,5 @@
 import React from "react";
+import DeckStack from "../components/DeckStack";
 import '../assets/css/dashboard.css'
 export default function DashboardPage() {
     return (
@@ -9,8 +10,14 @@ export default function DashboardPage() {
                     <a href="/newDeck">+ create new</a>
                 </button>
             </section>
-            ------------------------
-            <section>Decks</section>
+            <section className="decks-container">
+
+           <DeckStack/>
+
+            </section>
+            <section>
+
+            </section>
             
         </main>
         </>

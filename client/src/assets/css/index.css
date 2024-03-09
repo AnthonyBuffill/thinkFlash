@@ -6,7 +6,9 @@
     --redColor: #FB4D3D;
     --brownColor: #210203;
     --inputColor: #98bd96;
+    --boxShadow:  2px 2px 2px rgba(0, 0, 0, 0.3);
 }
 .body{
     background-color: var(--beigeColor);
+
 }

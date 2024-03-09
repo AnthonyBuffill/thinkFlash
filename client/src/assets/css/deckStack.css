@@ -1,0 +1,38 @@
+.decks-container{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    margin: 10px auto;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+
+
+.outerDeckStack{
+    width: 270px;
+    height: 130px;
+    background-color: var(--blueColor);
+    border-radius: 18px;
+    border-left:#235711  5px solid;
+    box-shadow: var(--boxShadow);
+}
+.innerDeckStack{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+        margin-left: 5px;
+        width: 270px;
+        height: 130px;
+        border-radius: 18px;
+        border-left:var(--brownColor) solid 3px;
+}
+.innerDeckStack:hover{
+    box-shadow: var(--boxShadow);
+    background-color: var(--orangeColor);
+
+}
+.outerDeckStack:hover{
+    box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.5);;
+}

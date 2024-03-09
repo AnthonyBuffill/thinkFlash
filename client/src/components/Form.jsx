@@ -18,6 +18,10 @@ export default function Form(props) {
         switch(formGroup){
             case addCard:
                 setFormHeader('Add New Card')
+                break;
+            default:
+                console.log('invalid value')
+                
         }
       }, [])
 
@@ -108,6 +112,7 @@ export default function Form(props) {
                     <a href="addCard">No thank's I'll create my own</a>
                 </section>
             }
+            {/* ADD A NEW CARD FORM */}
             {formGroup === addCard &&
             <section className="form-group">
                 <div className="form-label-group">
