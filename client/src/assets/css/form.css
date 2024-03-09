@@ -23,11 +23,11 @@
     padding-bottom: 5px;
 }
 
-.form-container input, textarea{
+.form-container input, .form-container textarea{
     background-color: var(--inputColor);
     opacity: .5;
     min-height: 35px;
-    min-width:75% ;
+    min-width:70% ;
 }
 .form-container label{
     font-size: 24px;
@@ -44,7 +44,7 @@
     padding: 15px 10px;
 }
 
-.form-container .form-group .form-label-group{
+ .form-label-group{
     display: flex;
     flex-direction: column;
     gap: 5px
@@ -74,4 +74,14 @@
     font-size: small;
     width: 90px;
     height: 35px;
+}
+
+@media screen and (min-width: 600px) {
+    .form-container{
+        max-width: 525px;
+    }
+    .form-container input, .form-container textarea{
+        width: 100px ;
+    
+    }
 }

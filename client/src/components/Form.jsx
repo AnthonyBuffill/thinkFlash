@@ -12,7 +12,7 @@ export default function Form() {
     const [formGroup, setFormGroup] = useState(start)
     // renders the correct form header
     const [formHeader, setFormHeader] = useState('Create New Deck')
-    // changes form changes on click
+    // changes form state on click
     const handleFormGroup = () => {
         switch(formGroup){
             case start:
@@ -46,32 +46,35 @@ export default function Form() {
             <header>
                 <h2>{formHeader}</h2>
             </header>
+            {/* Create subject and Description */}
             {formGroup === start && 
             <section className="form-group">
                 <div className="form-label-group">
                     <label htmlFor="">What is the subect?</label>
                     <input type="text" />
                 </div>
-                <div>
-                <label htmlFor="">Description:</label>
-                <textarea name="" id="" cols="30" rows="7"></textarea>
+                <div className="form-label-group">
+                    <label htmlFor="">Description:</label>
+                    <textarea name="" id="" cols="30" rows="7"></textarea>
                 </div>
                 <section className="btn-container">
                 <button onClick={handleFormGroup}>next</button>
                 </section>
             </section>
             }
+            {/*  ENTER FIRST QUESTION*/}
             {formGroup === front &&
             <section className="form-group">
                  <div className="form-label-group">
                  <label htmlFor="">Enter question </label>
                 
-                <input type="text" name="" id="" />
+                <input className="" type="text" name="" id="" />
                 <small>(front of card)</small>
                  </div>
                 <button onClick={handleFormGroup}>next</button>
             </section>
             }
+            {/* ENTER ANSWER */}
             {formGroup === back &&
             <section className="form-group">
                 <label htmlFor="">Enter answer </label>
@@ -80,6 +83,7 @@ export default function Form() {
                 <button onClick={handleFormGroup}>next</button>
             </section>      
             }
+            {/* GENERATE NEW DECK FORM OR CREATE OWN */}
             {formGroup === generate &&
                 <section className="form-group">
                     <div className="select-group">
