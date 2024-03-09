@@ -2,6 +2,8 @@ import React from "react";
 import DeckStack from "../components/DeckStack";
 import '../assets/css/dashboard.css'
 export default function DashboardPage() {
+
+    const title = 'TITLE EXAMPLE'
     return (
         <>
         <main>
@@ -12,8 +14,7 @@ export default function DashboardPage() {
             </section>
             <section className="decks-container">
 
-           <DeckStack/>
-
+           <DeckStack title ={title}/>
             </section>
             <section>
 
