@@ -75,7 +75,15 @@
     width: 90px;
     height: 35px;
 }
+/* add card form */
+.addCardDoneBtn{
+    background-color: var(--orangeColor) !important;
+    margin: 0 10px;
+}
+.addCardDoneBtn a{
+text-decoration: none;
 
+}
 @media screen and (min-width: 600px) {
     .form-container{
         max-width: 525px;

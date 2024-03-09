@@ -1,17 +1,27 @@
-import React, { useState }from "react";
+import React, { useState, useEffect }from "react";
 import '../assets/css/form.css'
-export default function Form() {
+export default function Form(props) {
     // vars for different form states
     const start = 'START'; 
     const front = 'FRONT'
     const back = 'BACK'
     const generate = 'GENERATE'
-    const loading = 'Loading'
+    const loading = 'LOADING'
+    const addCard= 'ADDCARD'
    
     // renders the correct form groups
-    const [formGroup, setFormGroup] = useState(start)
+    const [formGroup, setFormGroup] = useState(props.formState)
     // renders the correct form header
     const [formHeader, setFormHeader] = useState('Create New Deck')
+    // sets form for AddCard and Login /Sign up
+    useEffect(() => {
+        switch(formGroup){
+            case addCard:
+                setFormHeader('Add New Card')
+        }
+      }, [])
+
+
     // changes form state on click
     const handleFormGroup = () => {
         switch(formGroup){
@@ -27,9 +37,6 @@ export default function Form() {
                 break;
             case generate:
                 setFormGroup(loading)
-                break;
-            case start:
-                setFormGroup(front)
                 break;
             default:
                 console.log('invalid value')
@@ -58,7 +65,7 @@ export default function Form() {
                     <textarea name="" id="" cols="30" rows="7"></textarea>
                 </div>
                 <section className="btn-container">
-                <button onClick={handleFormGroup}>next</button>
+                    <button onClick={handleFormGroup}>next</button>
                 </section>
             </section>
             }
@@ -66,10 +73,9 @@ export default function Form() {
             {formGroup === front &&
             <section className="form-group">
                  <div className="form-label-group">
-                 <label htmlFor="">Enter question </label>
-                
-                <input className="" type="text" name="" id="" />
-                <small>(front of card)</small>
+                    <label htmlFor="">Enter question </label>
+                    <input className="" type="text" name="" id="" />
+                    <small>(front of card)</small>
                  </div>
                 <button onClick={handleFormGroup}>next</button>
             </section>
@@ -97,11 +103,29 @@ export default function Form() {
                         </select>
                     </div>
                     <section className="form-submit">
-                    <button>generate deck</button>
-
+                        <button>generate deck</button>
                     </section>
-                    <a href="">No thank's I'll create my own</a>
+                    <a href="addCard">No thank's I'll create my own</a>
                 </section>
+            }
+            {formGroup === addCard &&
+            <section className="form-group">
+                <div className="form-label-group">
+                    <label htmlFor="">Front of Card</label>
+                    <input type="text" />
+                </div>
+                <div className="form-label-group">
+                    <label htmlFor="">Back of Card</label>
+                    <textarea name="" id="" cols="30" rows="7"></textarea>
+                </div>
+                <section className="btn-container">
+                    <button>Add Another Card</button>
+                    <button className="addCardDoneBtn">
+                      <a href="/dashboard">Done</a>  
+                    </button>
+                </section>
+            </section>
+            
             }
             </form>
         </section>

@@ -1,10 +1,10 @@
 import React from "react";
 import Form from "../components/Form";
-export default function NewDeckPage() {
+
+export default function AddCardPage() {
     return (
         <>
-        <div>NewDeck</div>
-        <Form formState={'START'}></Form>
+        <Form formState={'ADDCARD'}></Form>
         </>
     )
 }
