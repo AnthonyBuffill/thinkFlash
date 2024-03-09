@@ -5,6 +5,7 @@
     --beigeColor: #F1E0C5;
     --redColor: #FB4D3D;
     --brownColor: #210203;
+    --inputColor: #98bd96;
 }
 .body{
     background-color: var(--beigeColor);
