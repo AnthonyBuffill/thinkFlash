@@ -2,9 +2,21 @@ const { OpenAI } = require('openai');
 const path = require('path');
 require('dotenv').config({path: path.resolve(__dirname, '../../.env') });
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const openai = intializeOpenAI();
+
+function intializeOpenAI(){
+  try{
+    const apiKey = process.env.OPENAI_API_KEY || undefined;
+    return new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }catch(error){
+    console.log({message:error});
+    return undefined;
+  }
+
+}
+
 module.exports = {
   async createFlashCards(req, res){
     try{
@@ -45,6 +57,7 @@ Make sure all cards fit under the classification of '${req.body.title}'.`;
       const userMessage = `Using '${front}' as a front side card example and '${back}' as back side card example.
 Create for me ${cardCount} flash cards and return them
 Make sure all cards fit under the classification of '${title}'.`;
+      
       const completion = await openai.chat.completions.create({
         messages: [{ role: "system", content: systemMessage }, {role: "user", content: userMessage}],
         model: "gpt-3.5-turbo",
@@ -54,14 +67,8 @@ Make sure all cards fit under the classification of '${title}'.`;
         // tool_choice:"auto",
       });
       console.log(completion);
-      // console.log(completion.choices[0].message);
-      try{
-        const jObj = JSON.parse(completion.choices[0].message.content);
-        return jObj;
-      }catch(error){
-        return json({message: "Could parse json"});
-      }
-      
+      const jObj = JSON.parse(completion.choices[0].message.content);
+      return jObj;
     } catch (error){
       return json({messsage: error});
     }
