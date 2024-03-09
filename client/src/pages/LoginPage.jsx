@@ -1,9 +1,10 @@
 import React from "react";
+import Form from '../components/Form'
 
 export default function LoginPage() {
     return (
         <>
-        <div>LOGIN</div>
+        <Form formState={'LOGIN'}/>
         </>
     )
 }

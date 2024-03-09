@@ -1,5 +1,5 @@
 import React from "react";
-import '../assets/css/deck.css'
+
 export default function DeckPage() {
     return (
         <>
@@ -9,7 +9,7 @@ export default function DeckPage() {
                     <a href="/addCard">+ add card</a>
                 </button>
                 <button>
-                    <a href="/addCard"> play</a>
+                    <a href="/play"> play</a>
                 </button>
             </section>
 

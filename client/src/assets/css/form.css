@@ -5,7 +5,9 @@
     margin: 30px auto;
     border-radius: 22px;
     border: var(--brownColor) 1px solid;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+.form-container:hover, .form-container:focus{
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 1);
 }
 .form-container header{
     min-height: 110px;
@@ -27,7 +29,7 @@
     background-color: var(--inputColor);
     opacity: .5;
     min-height: 35px;
-    min-width:70% ;
+    min-width: 60%;
 }
 .form-container label{
     font-size: 24px;
@@ -52,12 +54,14 @@
 .form-container button{
     background-color: var(--blueColor);
     border-radius: 15px;
-    padding: 8px;
+    padding: 15px;
     font-size: large;
     color: white;
+    width: fit-content;
 }
 .btn-container{
     display: flex;
+    
     flex-direction: row-reverse;
 }
 .select-group{
@@ -84,12 +88,18 @@
 text-decoration: none;
 
 }
+
 @media screen and (min-width: 600px) {
     .form-container{
-        max-width: 525px;
+        max-width: fit-content;
     }
     .form-container input, .form-container textarea{
-        width: 100px ;
-    
+        width: 100% ;
+    }
+
+    .inputs-container{
+        width: 400px;
+        margin: 0 auto;
+        padding-right:10px ;
     }
 }
