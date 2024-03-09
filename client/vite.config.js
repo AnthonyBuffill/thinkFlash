@@ -13,7 +13,12 @@ export default defineConfig({
         secure: false,
         changeOrigin: true,
         
-      },     
+      },   
+      '/api/openai/createFlashCards' :{
+        target: 'http://localhost:3001',
+        secure: false,
+        changeOrigin: true,
+      },
     }
   }
 })
