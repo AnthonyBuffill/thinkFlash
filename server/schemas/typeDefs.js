@@ -14,10 +14,10 @@ type Deck {
   createdAt: String
 }
 type Card {
-_id : Int
-frontText : String
-backText: String
-createdAt: String
+  _id : ID
+  frontText : String
+  backText: String
+  createdAt: String
 }
 type Auth {
   token: ID!

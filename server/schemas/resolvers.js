@@ -10,17 +10,24 @@ const {
         return User.find().populate('decks');
       },
       user: async (parent, { username }) => {
-        return User.findOne({ username }).populate('decks').exec();
+        return User.findOne({ username }).populate(
+          {
+            path:'decks',
+            populate: {
+              path: 'cards',
+            },
+          }
+        );
       },
       decks: async (parent, { username }) => {
         const params = username ? { username } : {};
         return Deck.find(params).sort({ createdAt: -1 }).populate('cards');
       },
       deck: async (parent, { deckId }) => {
-        return Deck.findOne({ _id: deckId });
+        return Deck.findOne({ _id: deckId }).populate('cards');
       },
       cards: async () =>{
-        return Card.find().exec();
+        return Card.find();
       },
       card: async (parent, {cardId}) =>{
         return Card.findOne({_id, cardId});
