@@ -1,4 +1,7 @@
-[
+{
+  "title": "Monk Characters",
+  "description": "Which character on Monk is which.",
+  "cards":[
   {
     "frontText": "The defective detective",
     "backText": "Adrian Monk"
@@ -39,4 +42,4 @@
     "frontText": "Brilliant but troubled hacker who assists Monk",
     "backText": "Julie Teeger"
   }
-]
+]}

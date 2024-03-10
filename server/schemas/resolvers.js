@@ -4,17 +4,13 @@ const {
   createCards,
 } = require('../controller/openAIController');
  
- 
- 
- 
- 
  const resolvers = {
     Query: {
       users: async () => {
         return User.find().populate('decks');
       },
       user: async (parent, { username }) => {
-        return User.findOne({ username }).populate('decks');
+        return User.findOne({ username }).populate('decks').exec();
       },
       decks: async (parent, { username }) => {
         const params = username ? { username } : {};
@@ -22,6 +18,12 @@ const {
       },
       deck: async (parent, { deckId }) => {
         return Deck.findOne({ _id: deckId });
+      },
+      cards: async () =>{
+        return Card.find().exec();
+      },
+      card: async (parent, {cardId}) =>{
+        return Card.findOne({_id, cardId});
       },
       createCards: async(parent, {title, front, back, cardCount}) => {
         const value = await createCards(title, front, back, cardCount);

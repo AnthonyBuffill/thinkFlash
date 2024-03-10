@@ -1,4 +1,7 @@
-[
+{
+  "title": "Human Bones",
+  "description": "Where are the humans bones",
+  "cards": [
   {
     "frontText": "Humerus",
     "backText": "Upper arm bone"
@@ -40,3 +43,4 @@
     "backText": "Foot bones"
   }
 ]
+}

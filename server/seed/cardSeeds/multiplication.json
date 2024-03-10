@@ -1,4 +1,7 @@
-[
+{
+  "title": "Multiplication",
+  "description": "Learn Multiplication",
+  "cards":[
   {
     "frontText": "2 * 4",
     "backText": "8"
@@ -40,3 +43,4 @@
     "backText": "50"
   }
 ]
+}
