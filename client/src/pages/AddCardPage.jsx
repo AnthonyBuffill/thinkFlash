@@ -1,10 +1,10 @@
 import React from "react";
 import Form from "../components/Form";
 
-export default function SignupPage() {
+export default function AddCardPage() {
     return (
         <>
-        <Form formState={'SIGNUP'}/>
+        <Form formState={'ADDCARD'}></Form>
         </>
     )
 }
