@@ -10,7 +10,8 @@ export default function Form(props) {
         generate: 'GENERATE',
         loading: 'LOADING',
         addCard: 'ADDCARD',
-        login: 'LOGIN'
+        login: 'LOGIN',
+        signup: 'SIGNUP'
     };
 
    
@@ -27,6 +28,12 @@ export default function Form(props) {
                 break;
             case actions.start:
                 setFormHeader('Create New Deck')
+                break;
+            case actions.login:
+                setFormHeader('Login Form')
+                break;
+            case actions.signup:
+                setFormHeader('Sign Up Form')
                 break;
             default:
                 return                
@@ -65,6 +72,44 @@ export default function Form(props) {
                     <h2>{formHeader}</h2>
                 </header>
                 <div className="inputs-container">
+                    {/* Login Form */}
+                    {formGroup === actions.login &&
+                    <section className="form-group">
+                        <div className="form-label-group">
+                            <label htmlFor="">Enter Email</label>
+                            <input type="email" />
+                        </div>
+                        <div className="form-label-group">
+                            <label htmlFor="">Enter Password</label>
+                            <input type="password" />
+                        </div>
+                        <a href="signup">No Account? Sign up here!</a>
+                        <section className="btn-container">
+                            <button>Submit</button>
+                        </section>
+                    </section>
+                    }
+                    {/* Login Form */}
+                    {formGroup === actions.signup &&
+                    <section className="form-group">
+                        <div className="form-label-group">
+                            <label htmlFor="">Enter Email</label>
+                            <input type="email" />
+                        </div>
+                        <div className="form-label-group">
+                            <label htmlFor="">Enter Password</label>
+                            <input type="password" />
+                        </div>
+                        <div className="form-label-group">
+                            <label htmlFor="">Re-enter Password</label>
+                            <input type="password" />
+                        </div>
+                        <a href="login">Already have an account? Log in here!</a>
+                        <section className="btn-container">
+                            <button>Submit</button>
+                        </section>
+                    </section>
+                    }
                      {/* Create subject and Description */}
                     {formGroup === actions.start && 
                     <section className="form-group">
