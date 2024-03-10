@@ -26,8 +26,13 @@ const {
         return Card.findOne({_id, cardId});
       },
       createCards: async(parent, {title, front, back, cardCount}) => {
-        const value = await createCards(title, front, back, cardCount);
-        return JSON.stringify(value);
+        try{
+          const value = await createCards(title, front, back, cardCount);
+          return JSON.stringify(value);
+        }catch(error){
+          console.log("AI error- OPENAI_API_KEY variable probably not set in .env " + error);
+          return error;
+        }
       },
     }, 
     Mutation: {

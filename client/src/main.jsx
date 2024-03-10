@@ -9,6 +9,8 @@ import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
 import NewDeckPage from './pages/NewDeckPage.jsx'
 import PlayPage from './pages/PlayPage.jsx'
+import DeckPage from './pages/DeckPage.jsx';
+import AddCardPage from './pages/AddCardPage.jsx';
 // styles
 import './assets/css/index.css'
 import './assets/css/resets.css'
@@ -19,8 +21,10 @@ const router = (
     <Route path="/" element={<App />}>
       <Route index element={<AboutPage />} />
       <Route path="dashboard" element={<DashboardPage/>} />
+      <Route path="deck" element={<DeckPage/>} />
       <Route path="dashboard/:deckId" element={<DashboardPage/>} />
       <Route path="newDeck" element={<NewDeckPage/>} />
+      <Route path="addCard" element={<AddCardPage/>} />
       <Route path="play" element={<PlayPage/>} />
       <Route path="login" element={<LoginPage />} />
       <Route path="signup" element={<SignupPage/>} />

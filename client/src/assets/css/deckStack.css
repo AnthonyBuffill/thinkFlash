@@ -1,0 +1,49 @@
+.decks-container{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    margin: 10px auto;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+
+
+.outerDeckStack{
+    width: 270px;
+    height: 130px;
+    background-color: var(--blueColor);
+    border-radius: 18px;
+    border-left:#235711  5px solid;
+    box-shadow: var(--boxShadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-left 0.3s ease;
+}
+
+.innerDeckStack{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    background-color: var(--blueColor);
+    margin-left: 2px;
+    width: 270px;
+    height: 130px;
+    border-radius: 18px;
+    border-left:var(--brownColor) solid 3px;
+
+    transition: border-left 0.3s ease, box-shadow 0.3s ease, background-color .3s ease, margin-left 0.3s ease; 
+}
+.innerDeckStack:hover{
+    box-shadow: var(--boxShadow);
+    border-left: gold solid 3px;
+    background-color: var(--orangeColor);
+    margin-left: 6px;
+
+}
+.outerDeckStack:hover{
+    box-shadow:  3px 3px 3px rgba(0, 0, 0, 0.5);;
+    background-color: rgb(198, 202, 203);
+    border-left:silver 5px solid;
+
+}

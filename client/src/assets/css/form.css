@@ -1,0 +1,105 @@
+.form-container{
+    background-color: var(--yellowColor);
+    min-height: fit-content;
+    max-width: 300px;
+    margin: 30px auto;
+    border-radius: 22px;
+    border: var(--brownColor) 1px solid;
+}
+.form-container:hover, .form-container:focus{
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 1);
+}
+.form-container header{
+    min-height: 110px;
+    background-color: var(--blueColor);
+    border-radius: 22px 22px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
+    color: white;
+}
+.form-container a{
+    color: var(--brownColor);
+    font-size: larger;
+    padding-bottom: 5px;
+}
+
+.form-container input, .form-container textarea{
+    background-color: var(--inputColor);
+    opacity: .5;
+    min-height: 35px;
+    min-width: 60%;
+}
+.form-container label{
+    font-size: 24px;
+}
+.form-container small{
+    display: block;
+    font-style:italic;
+    text-align: center;
+}
+.form-container .form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px 10px;
+}
+
+ .form-label-group{
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+}
+.form-container button{
+    background-color: var(--blueColor);
+    border-radius: 15px;
+    padding: 15px;
+    font-size: large;
+    color: white;
+    width: fit-content;
+}
+.btn-container{
+    display: flex;
+    
+    flex-direction: row-reverse;
+}
+.select-group{
+    margin: 10px;
+
+}
+.select-group label{
+    font-size: 20px;
+}
+.select-group select {
+    display: inline;
+    margin-left: 20px;
+    background-color: var(--inputColor);
+    font-size: small;
+    width: 90px;
+    height: 35px;
+}
+/* add card form */
+.addCardDoneBtn{
+    background-color: var(--orangeColor) !important;
+    margin: 0 10px;
+}
+.addCardDoneBtn a{
+text-decoration: none;
+
+}
+
+@media screen and (min-width: 600px) {
+    .form-container{
+        max-width: fit-content;
+    }
+    .form-container input, .form-container textarea{
+        width: 100% ;
+    }
+
+    .inputs-container{
+        width: 400px;
+        margin: 0 auto;
+        padding-right:10px ;
+    }
+}

@@ -1,0 +1,29 @@
+.dash-nav-container{
+    border-bottom: var(--brownColor) 2px solid;
+    border-top: var(--brownColor) 1px solid;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    padding: 0 20px;
+    gap: 20px;
+}
+.dash-nav-container button{
+    background-color: var(--yellowColor);
+    border-radius: 15px;
+    padding: 8px;
+}
+.dash-nav-container button:hover{
+    box-shadow: var(--boxShadow);
+}
+.dash-nav-container button a{
+    text-decoration: none;
+    color: var(--brownColor);
+    font-size: medium;
+}
+@media screen and (min-width: 600px) {
+    .dash-nav-container{
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+}
