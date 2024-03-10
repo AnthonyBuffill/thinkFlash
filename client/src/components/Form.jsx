@@ -1,5 +1,11 @@
-import React, { useState, useEffect }from "react";
-import '../assets/css/form.css'
+import React, { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER, ADD_USER } from '../utils/mutations';
+import '../assets/css/form.css';
+import DashboardPage from '../pages/DashboardPage';
+import Auth from '../utils/auth';
+
 export default function Form(props) {
     // vars for different form states
 
@@ -19,6 +25,13 @@ export default function Form(props) {
     const [formGroup, setFormGroup] = useState(props.formState)
     // renders the correct form header
     const [formHeader, setFormHeader] = useState('')
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false); //new state var
+    const history = useHistory();
+    const [loginMutation, { loading: loginLoading, error: loginError }] = useMutation(LOGIN_USER);
+    const [signupMutation, { loading: signupLoading, error: signupError }] = useMutation(ADD_USER);
 
     // sets form headers for each form type
     useEffect(() => {
@@ -40,6 +53,44 @@ export default function Form(props) {
         }
       }, [])
 
+      const handleLoginSubmit = async (e) => {
+        e.preventDefault();
+    
+        try {
+          const { data } = await loginMutation({ variables: { email, password } });
+    
+          if (data && data.login && data.login.token) {
+            const token = data.login.token;
+            setIsLoggedIn(true);
+            history.push('/DashboardPage');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
+    
+      const handleSignupSubmit = async (e) => {
+        e.preventDefault();
+    
+        // Check if passwords match
+        if (password !== confirmPassword) {
+          console.error('Passwords do not match');
+          return;
+        }
+    
+        try {
+          const { data } = await signupMutation({ variables: { email, password } });
+    
+          // If signup is successful, set isLoggedIn to true
+          if (data && data.signup && data.signup.token) {
+            const token = data.signup.token;
+            setIsLoggedIn(true);
+            history.push('/dashboard');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
 
     // changes form state for --Generate New Deck-- Form on click
     const handleFormGroup = () => {
@@ -67,7 +118,7 @@ export default function Form(props) {
     return(
         <>
         <section className="form-container">
-            <form>
+            <form onSubmit={formGroup === actions.login ? handleLoginSubmit : handleSignupSubmit}>
                 <header>
                     <h2>{formHeader}</h2>
                 </header>
@@ -76,40 +127,66 @@ export default function Form(props) {
                     {formGroup === actions.login &&
                     <section className="form-group">
                         <div className="form-label-group">
-                            <label htmlFor="">Enter Email</label>
-                            <input type="email" />
-                        </div>
-                        <div className="form-label-group">
-                            <label htmlFor="">Enter Password</label>
-                            <input type="password" />
-                        </div>
-                        <a href="signup">No Account? Sign up here!</a>
-                        <section className="btn-container">
-                            <button>Submit</button>
-                        </section>
-                    </section>
+                        <label htmlFor="">Enter Email</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="form-label-group">
+                  <label htmlFor="">Enter Password</label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <a href="signup">No Account? Sign up here!</a>
+                <section className="btn-container">
+                  <button type="submit" disabled={loading}>
+                    {loading ? 'Logging in...' : 'Submit'}
+                  </button>
+                </section>
+                {error && <p>Error: {error.message}</p>}
+              </section>
                     }
-                    {/* Login Form */}
-                    {formGroup === actions.signup &&
-                    <section className="form-group">
-                        <div className="form-label-group">
-                            <label htmlFor="">Enter Email</label>
-                            <input type="email" />
-                        </div>
-                        <div className="form-label-group">
-                            <label htmlFor="">Enter Password</label>
-                            <input type="password" />
-                        </div>
-                        <div className="form-label-group">
-                            <label htmlFor="">Re-enter Password</label>
-                            <input type="password" />
-                        </div>
-                        <a href="login">Already have an account? Log in here!</a>
-                        <section className="btn-container">
-                            <button>Submit</button>
-                        </section>
-                    </section>
-                    }
+                    {/* Signup Form */}
+                    {formGroup === actions.signup && (
+              <section className="form-group">
+                <div className="form-label-group">
+                  <label htmlFor="">Enter Email</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="form-label-group">
+                  <label htmlFor="">Enter Password</label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <div className="form-label-group">
+                  <label htmlFor="">Re-enter Password</label>
+                  <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                </div>
+                <a href="login">Already have an account? Log in here!</a>
+                <section className="btn-container">
+                  <button type="submit" disabled={signupLoading}>
+                    {signupLoading ? 'Signing up...' : 'Submit'}
+                  </button>
+                </section>
+                {signupError && <p>Error: {signupError.message}</p>}
+              </section>
+                   )}
                      {/* Create subject and Description */}
                     {formGroup === actions.start && 
                     <section className="form-group">
