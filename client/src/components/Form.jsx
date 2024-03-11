@@ -11,11 +11,13 @@ export default function Form(props) {
     // vars for different form states
 
     const actions = {
+      generateDeck:{
         start: 'START',
         front: 'FRONT',
         back: 'BACK',
         generate: 'GENERATE',
         loading: 'LOADING',
+      },
         addCard: 'ADDCARD',
         login: 'LOGIN',
         signup: 'SIGNUP'
@@ -41,7 +43,7 @@ export default function Form(props) {
             case actions.addCard:
                 setFormHeader('Add New Card')
                 break;
-            case actions.start:
+            case actions.generateDeck.start:
                 setFormHeader('Create New Deck')
                 break;
             case actions.login:
@@ -99,17 +101,17 @@ export default function Form(props) {
       e.preventDefault();
         switch(formGroup){
             case actions.start:
-                setFormGroup(actions.front)
+                setFormGroup(actions.generateDeck.front)
                 break;
-            case actions.front:
-                setFormGroup(actions.back)
+            case actions:
+                setFormGroup(actions.generateDeck.back)
                 break;
-            case actions.back:
-                setFormGroup(actions.generate)
+            case actions.generateDeck.back:
+                setFormGroup(actions.generateDeck.generate)
                 setFormHeader('Generate Deck')
                 break;
-            case actions.generate:
-                setFormGroup(actions.loading)
+            case actions.generateDeck.generate:
+                setFormGroup(actions.generateDeck.loading)
                 break;
             default:
                 console.log('invalid value')
@@ -166,6 +168,12 @@ export default function Form(props) {
                   />
                 </div>
                 <div className="form-label-group">
+                  <label htmlFor="">Enter Username</label>
+                  <input
+                  type="text"
+                  />
+                </div>
+                <div className="form-label-group">
                   <label htmlFor="">Enter Password</label>
                   <input
                     type="password"
@@ -191,12 +199,25 @@ export default function Form(props) {
               </section>
                    )}
                      {/* Create subject and Description */}
-                    {formGroup === actions.start && 
-                    <AddDeck  onClick={handleFormGroup}></AddDeck>
-                    
+
+                    {formGroup === actions.generateDeck.start && 
+                    <section className="form-group">
+                        <div className="form-label-group">
+                            <label htmlFor="">What is the subect?</label>
+                            <input type="text" />
+                        </div>
+                        <div className="form-label-group">
+                            <label htmlFor="">Description:</label>
+                            <textarea name="" id="" cols="30" rows="7"></textarea>
+                        </div>
+                        <section className="btn-container">
+                            <button onClick={handleFormGroup}>next</button>
+                        </section>
+                    </section>
+
                     }
                     {/*  ENTER FIRST QUESTION*/}
-                    {formGroup === actions.front &&
+                    {formGroup === actions.generateDeck.front &&
                     <section className="form-group">
                         <div className="form-label-group">
                             <label htmlFor="">Enter question </label>
@@ -207,7 +228,7 @@ export default function Form(props) {
                     </section>
                     }
                     {/* ENTER ANSWER */}
-                    {formGroup === actions.back &&
+                    {formGroup === actions.generateDeck.back &&
                     <section className="form-group">
                         <label htmlFor="">Enter answer </label>
                         <textarea name="" id="" cols="30" rows="7"></textarea>
@@ -216,7 +237,7 @@ export default function Form(props) {
                     </section>      
                     }
                     {/* GENERATE NEW DECK FORM OR CREATE OWN */}
-                    {formGroup === actions.generate &&
+                    {formGroup === actions.generateDeck.generate &&
                         <section className="form-group">
                             <div className="select-group">
                                 <label htmlFor="">How many cards would you like to generate?</label>
@@ -234,6 +255,8 @@ export default function Form(props) {
                             <a href="addCard">No thank's I'll create my own</a>
                         </section>
                     }
+                    {/* END OF CREATE DECK FORM */}
+                    
                     {/* ADD A NEW CARD FORM */}
                     {formGroup === actions.addCard &&
                     <section className="form-group">
