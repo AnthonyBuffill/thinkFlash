@@ -5,6 +5,7 @@ import { LOGIN_USER, ADD_USER } from '../utils/mutations';
 import '../assets/css/form.css';
 import DashboardPage from '../pages/DashboardPage';
 import Auth from '../utils/auth';
+import AddDeck from "./forms/AddDeck";
 
 export default function Form(props) {
     // vars for different form states
@@ -190,19 +191,8 @@ export default function Form(props) {
                    )}
                      {/* Create subject and Description */}
                     {formGroup === actions.start && 
-                    <section className="form-group">
-                        <div className="form-label-group">
-                            <label htmlFor="">What is the subect?</label>
-                            <input type="text" />
-                        </div>
-                        <div className="form-label-group">
-                            <label htmlFor="">Description:</label>
-                            <textarea name="" id="" cols="30" rows="7"></textarea>
-                        </div>
-                        <section className="btn-container">
-                            <button onClick={handleFormGroup}>next</button>
-                        </section>
-                    </section>
+                    <AddDeck  onClick={handleFormGroup}></AddDeck>
+                    
                     }
                     {/*  ENTER FIRST QUESTION*/}
                     {formGroup === actions.front &&
