@@ -28,6 +28,7 @@ export default function Form(props) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false); //new state var
     const navigate = useNavigate();
     const [loginMutation, { loading: loginLoading, error: loginError }] = useMutation(LOGIN_USER);
@@ -71,7 +72,7 @@ export default function Form(props) {
     
       const handleSignupSubmit = async (e) => {
         e.preventDefault();
-    
+        
         // Check if passwords match
         if (password !== confirmPassword) {
           console.error('Passwords do not match');
@@ -144,11 +145,11 @@ export default function Form(props) {
                 </div>
                 <a href="signup">No Account? Sign up here!</a>
                 <section className="btn-container">
-                  <button type="submit" disabled={loading}>
-                    {loading ? 'Logging in...' : 'Submit'}
+                  <button type="submit" disabled={loginLoading}>
+                    {loginLoading ? 'Logging in...' : 'Submit'}
                   </button>
                 </section>
-                {error && <p>Error: {error.message}</p>}
+                {signupError && <p>Error: {signupError.message}</p>}
               </section>
                     }
                     {/* Signup Form */}
