@@ -1,0 +1,22 @@
+.deck-flip-card-container{
+    width: 300px;
+    height: 150px;
+    margin: 20px;
+}
+.cards-container{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    margin: 10px auto;
+    gap: 20px;
+    justify-content: space-around;
+}
+.deck-flip-card-container .flipped {
+    transform: rotateY(180deg);
+  }
+@media screen and (min-width: 600px) {
+    .cards-container{
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+}

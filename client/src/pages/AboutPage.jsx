@@ -27,7 +27,8 @@ export default function AboutPage() {
           description="This is the description for Card 3."
           externalLink= "https://antbuffillportfolio.netlify.app/"
         />
-      </div>
+      </div> 
+
     </>
   );
 }
