@@ -1,0 +1,46 @@
+{
+  "title": "Human Bones",
+  "description": "Where are the humans bones",
+  "cards": [
+  {
+    "frontText": "Humerus",
+    "backText": "Upper arm bone"
+  },
+  {
+    "frontText": "Femur",
+    "backText": "Thigh bone"
+  },
+  {
+    "frontText": "Tibia",
+    "backText": "Shin bone"
+  },
+  {
+    "frontText": "Clavicle",
+    "backText": "Collarbone"
+  },
+  {
+    "frontText": "Scapula",
+    "backText": "Shoulder blade"
+  },
+  {
+    "frontText": "Patella",
+    "backText": "Kneecap"
+  },
+  {
+    "frontText": "Sternum",
+    "backText": "Breastbone"
+  },
+  {
+    "frontText": "Phalanges",
+    "backText": "Finger and toe bones"
+  },
+  {
+    "frontText": "Carpals",
+    "backText": "Wrist bones"
+  },
+  {
+    "frontText": "Metatarsals",
+    "backText": "Foot bones"
+  }
+]
+}
