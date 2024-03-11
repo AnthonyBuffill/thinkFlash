@@ -89,7 +89,7 @@ export default function Form(props) {
                         </section>
                     </section>
                     }
-                    {/* Login Form */}
+                    {/* Sign up Form */}
                     {formGroup === actions.signup &&
                     <section className="form-group">
                         <div className="form-label-group">
@@ -110,6 +110,8 @@ export default function Form(props) {
                         </section>
                     </section>
                     }
+
+                    {/* START OF CREATE DECK FORM */}
                      {/* Create subject and Description */}
                     {formGroup === actions.start && 
                     <section className="form-group">
@@ -165,6 +167,8 @@ export default function Form(props) {
                             <a href="addCard">No thank's I'll create my own</a>
                         </section>
                     }
+                    {/* END OF CREATE DECK FORM */}
+                    
                     {/* ADD A NEW CARD FORM */}
                     {formGroup === actions.addCard &&
                     <section className="form-group">

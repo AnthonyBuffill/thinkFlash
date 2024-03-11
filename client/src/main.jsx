@@ -12,8 +12,8 @@ import PlayPage from './pages/PlayPage.jsx'
 import DeckPage from './pages/DeckPage.jsx';
 import AddCardPage from './pages/AddCardPage.jsx';
 // styles
-import './assets/css/index.css'
 import './assets/css/resets.css'
+import './assets/css/index.css'
 
 
 const router = (
