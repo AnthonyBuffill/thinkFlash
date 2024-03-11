@@ -1,0 +1,46 @@
+{
+  "title": "Multiplication",
+  "description": "Learn Multiplication",
+  "cards":[
+  {
+    "frontText": "2 * 4",
+    "backText": "8"
+  },
+  {
+    "frontText": "6 * 7",
+    "backText": "42"
+  },
+  {
+    "frontText": "3 * 9",
+    "backText": "27"
+  },
+  {
+    "frontText": "11 * 5",
+    "backText": "55"
+  },
+  {
+    "frontText": "4 * 8",
+    "backText": "32"
+  },
+  {
+    "frontText": "10 * 3",
+    "backText": "30"
+  },
+  {
+    "frontText": "7 * 6",
+    "backText": "42"
+  },
+  {
+    "frontText": "9 * 3",
+    "backText": "27"
+  },
+  {
+    "frontText": "12 * 2",
+    "backText": "24"
+  },
+  {
+    "frontText": "5 * 10",
+    "backText": "50"
+  }
+]
+}

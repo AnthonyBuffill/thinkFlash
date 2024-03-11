@@ -1,0 +1,45 @@
+{
+  "title": "Monk Characters",
+  "description": "Which character on Monk is which.",
+  "cards":[
+  {
+    "frontText": "The defective detective",
+    "backText": "Adrian Monk"
+  },
+  {
+    "frontText": "Nervous assistant to Adrian Monk",
+    "backText": "Natalie Teeger"
+  },
+  {
+    "frontText": "Captain of the SFPD Homicide Division",
+    "backText": "Leland Stottlemeyer"
+  },
+  {
+    "frontText": "Playboy billionaire with a soft spot for Monk",
+    "backText": "Billionaire Eddie"
+  },
+  {
+    "frontText": "Monk's psychiatrist who helps him cope",
+    "backText": "Dr. Charles Kroger"
+  },
+  {
+    "frontText": "Formerly famous actor and friend of Monk",
+    "backText": "Kevin Dorfman"
+  },
+  {
+    "frontText": "Monk's eccentric former boss",
+    "backText": "Harold Krenshaw"
+  },
+  {
+    "frontText": "Monk's devoted nurse and helper",
+    "backText": "Sharona Fleming"
+  },
+  {
+    "frontText": "Monk's arch-nemesis and rival detective",
+    "backText": "Inspector Harold Mandel"
+  },
+  {
+    "frontText": "Brilliant but troubled hacker who assists Monk",
+    "backText": "Julie Teeger"
+  }
+]}

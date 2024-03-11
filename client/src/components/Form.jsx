@@ -29,7 +29,7 @@ export default function Form(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false); //new state var
-    const history = useNavigate();
+    const navigate = useNavigate();
     const [loginMutation, { loading: loginLoading, error: loginError }] = useMutation(LOGIN_USER);
     const [signupMutation, { loading: signupLoading, error: signupError }] = useMutation(ADD_USER);
 
@@ -62,7 +62,7 @@ export default function Form(props) {
           if (data && data.login && data.login.token) {
             const token = data.login.token;
             setIsLoggedIn(true);
-            history.push('/DashboardPage');
+            navigate.push('/DashboardPage');
           }
         } catch (error) {
           console.error(error);
@@ -85,7 +85,7 @@ export default function Form(props) {
           if (data && data.signup && data.signup.token) {
             const token = data.signup.token;
             setIsLoggedIn(true);
-            history.push('/dashboard');
+            navigate.push('/dashboard');
           }
         } catch (error) {
           console.error(error);
