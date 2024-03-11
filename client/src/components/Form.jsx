@@ -5,6 +5,7 @@ import { LOGIN_USER, ADD_USER } from '../utils/mutations';
 import '../assets/css/form.css';
 import DashboardPage from '../pages/DashboardPage';
 import Auth from '../utils/auth';
+import AddDeck from "./forms/AddDeck";
 
 export default function Form(props) {
     // vars for different form states
@@ -96,7 +97,8 @@ export default function Form(props) {
       };
 
     // changes form state for --Generate New Deck-- Form on click
-    const handleFormGroup = () => {
+    const handleFormGroup = (e) => {
+      e.preventDefault();
         switch(formGroup){
             case actions.start:
                 setFormGroup(actions.generateDeck.front)
@@ -121,7 +123,7 @@ export default function Form(props) {
     return(
         <>
         <section className="form-container">
-            <form onSubmit={formGroup === actions.login ? handleLoginSubmit : handleSignupSubmit}>
+            <form>
                 <header>
                     <h2>{formHeader}</h2>
                 </header>
@@ -147,15 +149,15 @@ export default function Form(props) {
                 </div>
                 <a href="signup">No Account? Sign up here!</a>
                 <section className="btn-container">
-                  <button type="submit" disabled={loginLoading}>
+                  <button type="submit" onClick={handleLoginSubmit} disabled={loginLoading}>
                     {loginLoading ? 'Logging in...' : 'Submit'}
                   </button>
                 </section>
                 {signupError && <p>Error: {signupError.message}</p>}
               </section>
-                    }
-                    {/* Signup Form */}
-                    {formGroup === actions.signup && (
+            }
+            {/* Signup Form */}
+            {formGroup === actions.signup && (
               <section className="form-group">
                 <div className="form-label-group">
                   <label htmlFor="">Enter Email</label>
@@ -189,7 +191,7 @@ export default function Form(props) {
                 </div>
                 <a href="login">Already have an account? Log in here!</a>
                 <section className="btn-container">
-                  <button type="submit" disabled={signupLoading}>
+                  <button type="submit" onClick={handleSignupSubmit} disabled={signupLoading}>
                     {signupLoading ? 'Signing up...' : 'Submit'}
                   </button>
                 </section>
@@ -197,6 +199,7 @@ export default function Form(props) {
               </section>
                    )}
                      {/* Create subject and Description */}
+
                     {formGroup === actions.generateDeck.start && 
                     <section className="form-group">
                         <div className="form-label-group">
@@ -211,6 +214,7 @@ export default function Form(props) {
                             <button onClick={handleFormGroup}>next</button>
                         </section>
                     </section>
+
                     }
                     {/*  ENTER FIRST QUESTION*/}
                     {formGroup === actions.generateDeck.front &&
