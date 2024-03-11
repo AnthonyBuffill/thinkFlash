@@ -12,7 +12,7 @@
     transform-style: preserve-3d;
     border-radius: 50px;
 }
-.flipped {
+.play-flip-card-container .flipped {
     transform: rotateY(180deg);
   }
 .flip-card-front, .flip-card-back {
