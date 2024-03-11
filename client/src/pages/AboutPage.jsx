@@ -1,12 +1,11 @@
 import React from 'react';
 import AboutUs from '../components/AboutUs'; 
-
 export default function AboutPage() {
   return (
     <>
       <div>About</div>
       <div style={{ display: 'flex', justifyContent: 'space-between', padding: '20px' }}>
-        <Card
+        {/* <Card
           title="Luke Garnsey"
           imageSrc="https://placekitten.com/300/200"
           description="This is the description for Card 1."
@@ -23,7 +22,7 @@ export default function AboutPage() {
           imageSrc="https://placekitten.com/300/202"
           description="This is the description for Card 3."
           externalLink="https://example.com"
-        />
+        /> */}
       </div>
     </>
   );
