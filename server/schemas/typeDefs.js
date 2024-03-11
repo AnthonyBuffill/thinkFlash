@@ -14,10 +14,10 @@ type Deck {
   createdAt: String
 }
 type Card {
-_id : Int
-frontText : String
-backText: String
-createdAt: String
+  _id : ID
+  frontText : String
+  backText: String
+  createdAt: String
 }
 type Auth {
   token: ID!
@@ -29,6 +29,8 @@ type Query {
   user(username: String!): User
   decks(username: String): [Deck]
   deck(deckId: ID!): Deck
+  card(cardId: ID!): Card
+  cards: [Card]
   createCards(title: String!, front: String!, back: String!, cardCount:Int!): String
 }
 type Mutation {

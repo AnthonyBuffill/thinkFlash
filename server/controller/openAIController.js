@@ -53,8 +53,8 @@ Make sure all cards fit under the classification of '${req.body.title}'.`;
   async createCards(title, front, back, cardCount){
     try{
 
-      const systemMessage = `You are a teacher who makes flash card decks for students, you return flash cards with JSON parmeters (front:string, back:string)`
-      const userMessage = `Using '${front}' as a front side card example and '${back}' as back side card example.
+      const systemMessage = `You are a teacher who makes flash card decks for students, you return flash cards with JSON parmeters (frontText:string, backText:string)`
+      const userMessage = `Using '${front}' as a frontText card example and '${back}' as backText card example.
 Create for me ${cardCount} flash cards and return them
 Make sure all cards fit under the classification of '${title}'.`;
       
