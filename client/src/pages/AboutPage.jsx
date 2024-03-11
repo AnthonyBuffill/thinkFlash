@@ -1,28 +1,31 @@
 import React from 'react';
 import AboutUs from '../components/AboutUs'; 
+import AntB from '../assets/images/AntB.png'
+import KarenD from '../assets/images/KarenD.png';
+
 
 export default function AboutPage() {
   return (
     <>
-      <div>About</div>
+      <div> Where intelligence meets intuition in the world of digital learning.</div>
       <div style={{ display: 'flex', justifyContent: 'space-between', padding: '20px' }}>
-        <Card
+        <AboutUs
           title="Luke Garnsey"
-          imageSrc="https://placekitten.com/300/200"
-          description="This is the description for Card 1."
-          externalLink="https://example.com"
+          imageSrc={"https://placekitten.com/300/200"}
+          description="Dedicated full stack developer with a profound passion for server-side development. Armed with extensive expertise in crafting robust server architectures and optimizing backend functionality, I thrive on the challenge of creating seamless, efficient solutions that power exceptional user experiences. My commitment to staying at the forefront of technology ensures I bring innovative and scalable server-side solutions to every project I undertake."
+          externalLink= "https://phenomenal-caramel-76b1b5.netlify.app/"
         />
-        <Card
+        <AboutUs
           title="Karen Douglas"
-          imageSrc="https://placekitten.com/300/201"
+          imageSrc={KarenD}
           description="This is the description for Card 2."
-          externalLink="https://example.com"
+          externalLink= "https://karenportfolio.netlify.app/"
         />
-        <Card
+        <AboutUs
           title="Anthony Buffill"
-          imageSrc="https://placekitten.com/300/202"
+          imageSrc= {AntB}
           description="This is the description for Card 3."
-          externalLink="https://example.com"
+          externalLink= "https://antbuffillportfolio.netlify.app/"
         />
       </div>
     </>

@@ -7,7 +7,7 @@ const AboutUs = ({ title, imageSrc, description, externalLink }) => {
       <img src={imageSrc} alt={title} style={{ maxWidth: '100%', height: 'auto' }} />
       <p>{description}</p>
       <a href={externalLink} target="_blank" rel="noopener noreferrer">
-        <button>Profile</button>
+        <button>Portfolio</button>
       </a>
     </div>
   );
