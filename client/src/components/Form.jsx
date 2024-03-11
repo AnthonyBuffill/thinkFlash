@@ -166,6 +166,12 @@ export default function Form(props) {
                   />
                 </div>
                 <div className="form-label-group">
+                  <label htmlFor="">Enter Username</label>
+                  <input
+                  type="text"
+                  />
+                </div>
+                <div className="form-label-group">
                   <label htmlFor="">Enter Password</label>
                   <input
                     type="password"

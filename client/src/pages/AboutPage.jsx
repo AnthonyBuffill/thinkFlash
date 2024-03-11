@@ -5,7 +5,7 @@ export default function AboutPage() {
   return (
     <>
       <div>About</div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '20px' }}>
+      {/* <div style={{ display: 'flex', justifyContent: 'space-between', padding: '20px' }}>
         <Card
           title="Luke Garnsey"
           imageSrc="https://placekitten.com/300/200"
@@ -24,7 +24,7 @@ export default function AboutPage() {
           description="This is the description for Card 3."
           externalLink="https://example.com"
         />
-      </div>
+      </div> */}
     </>
   );
 }

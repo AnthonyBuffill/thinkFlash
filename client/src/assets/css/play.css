@@ -23,8 +23,14 @@
     backface-visibility: hidden;
     border-radius: 25px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.8);
-
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    line-height: 1.3;
+} 
   
   .flip-card-front {
     background-color: var(--orangeColor);
@@ -33,4 +39,27 @@
   .flip-card-back {
     background-color: var(--yellowColor);
     transform: rotateY(180deg);
+  }
+
+  .play-buttons{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px ;
+  }
+  .play-buttons button{
+    border-radius: 10px;
+    height: 35px;
+    font-size: x-large;
+  }
+  .wrong{
+    background-color: var(--redColor);
+  }
+  .right{
+    background-color: var(--blueColor);
+  }
+  .flip-card-front h2, .flip-card-back h2 {
+    font-weight: 800;
+  }
+  .flip-card-front h2{
+    font-size: x-large;
   }

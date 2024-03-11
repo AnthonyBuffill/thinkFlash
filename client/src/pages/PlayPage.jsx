@@ -25,9 +25,9 @@ export default function PlayPage() {
                 </figure>
             </div>
             {isFlipped &&
-            <section>
-                <button>wrong</button>
-                <button>right</button>
+            <section className="play-buttons">
+                <button className="wrong">wrong</button>
+                <button className="right">right</button>
             </section>                 
             }
         </section>
