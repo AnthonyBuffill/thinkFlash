@@ -31,7 +31,7 @@ type Query {
   deck(deckId: ID!): Deck
   card(cardId: ID!): Card
   cards: [Card]
-  createCards(title: String!, front: String!, back: String!, cardCount:Int!): String
+  createCards(title: String!, frontText: String!, backText: String!, cardCount:Int!): String
 }
 type Mutation {
   addUser(username: String!, email: String!, password: String!): Auth
@@ -39,7 +39,7 @@ type Mutation {
   addDeck(title: String!, description: String!): Deck
   addCard(
     deckId: ID!
-    FrontText: String!
+    frontText: String!
     backText: String!
   ): Deck
   removeDeck(deckId: ID!): Deck

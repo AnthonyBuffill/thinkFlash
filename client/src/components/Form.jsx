@@ -5,7 +5,8 @@ import { LOGIN_USER, ADD_USER } from '../utils/mutations';
 import '../assets/css/form.css';
 import DashboardPage from '../pages/DashboardPage';
 import Auth from '../utils/auth';
-import AddDeck from "./forms/AddDeck";
+import AddDeckForm from "./forms/AddDeckForm";
+import Loading from "./forms/Loading";
 
 export default function Form(props) {
     // vars for different form states
@@ -20,12 +21,14 @@ export default function Form(props) {
       },
         addCard: 'ADDCARD',
         login: 'LOGIN',
-        signup: 'SIGNUP'
+        signup: 'SIGNUP',
+        addDeck: '',
     };
 
    
     // renders the correct form groups
     const [formGroup, setFormGroup] = useState(props.formState)
+    console.log(formGroup);
     // renders the correct form header
     const [formHeader, setFormHeader] = useState('')
 
@@ -100,10 +103,10 @@ export default function Form(props) {
     const handleFormGroup = (e) => {
       e.preventDefault();
         switch(formGroup){
-            case actions.start:
+            case actions.generateDeck.start:
                 setFormGroup(actions.generateDeck.front)
                 break;
-            case actions:
+            case actions.generateDeck.front:
                 setFormGroup(actions.generateDeck.back)
                 break;
             case actions.generateDeck.back:
@@ -199,64 +202,15 @@ export default function Form(props) {
               </section>
                    )}
                      {/* Create subject and Description */}
-
-                    {formGroup === actions.generateDeck.start && 
-                    <section className="form-group">
-                        <div className="form-label-group">
-                            <label htmlFor="">What is the subect?</label>
-                            <input type="text" />
-                        </div>
-                        <div className="form-label-group">
-                            <label htmlFor="">Description:</label>
-                            <textarea name="" id="" cols="30" rows="7"></textarea>
-                        </div>
-                        <section className="btn-container">
-                            <button onClick={handleFormGroup}>next</button>
-                        </section>
-                    </section>
-
-                    }
-                    {/*  ENTER FIRST QUESTION*/}
-                    {formGroup === actions.generateDeck.front &&
-                    <section className="form-group">
-                        <div className="form-label-group">
-                            <label htmlFor="">Enter question </label>
-                            <input className="" type="text" name="" id="" />
-                            <small>(front of card)</small>
-                        </div>
-                        <button onClick={handleFormGroup}>next</button>
-                    </section>
-                    }
-                    {/* ENTER ANSWER */}
-                    {formGroup === actions.generateDeck.back &&
-                    <section className="form-group">
-                        <label htmlFor="">Enter answer </label>
-                        <textarea name="" id="" cols="30" rows="7"></textarea>
-                        <small>(back of card)</small>
-                        <button onClick={handleFormGroup}>next</button>
-                    </section>      
-                    }
-                    {/* GENERATE NEW DECK FORM OR CREATE OWN */}
-                    {formGroup === actions.generateDeck.generate &&
-                        <section className="form-group">
-                            <div className="select-group">
-                                <label htmlFor="">How many cards would you like to generate?</label>
-                                <select  >
-                                    <option value="" selected>select</option>
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                    <option value="40">40</option>
-                                </select>
-                            </div>
-                            <section className="form-submit">
-                                <button>generate deck</button>
-                            </section>
-                            <a href="addCard">No thank's I'll create my own</a>
-                        </section>
-                    }
-                    {/* END OF CREATE DECK FORM */}
+                    {(formGroup === actions.generateDeck.start || formGroup === actions.generateDeck.front||formGroup === actions.generateDeck.back || formGroup === actions.generateDeck.generate) && (
+                      
+                      <AddDeckForm onClick={handleFormGroup} state={formGroup} actions={actions} newDeck={props.newDeck}/>
+                      
+                    )}
+                    {formGroup === actions.loading && (
                     
+                      <Loading />
+                    )}
                     {/* ADD A NEW CARD FORM */}
                     {formGroup === actions.addCard &&
                     <section className="form-group">
@@ -283,3 +237,4 @@ export default function Form(props) {
         </>
     )
 }
+
