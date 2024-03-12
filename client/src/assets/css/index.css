@@ -12,6 +12,6 @@
     background-color: var(--beigeColor);
 
 }
-button:hover{
+button:hover, button:focus{
  box-shadow: var(--boxShadow);
 }

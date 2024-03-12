@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { useParams, Link } from "react-router-dom";
 import '../assets/css/play.css'
 import { useQuery } from '@apollo/client';
 import {QUERY_SINGLE_USER} from '../utils/queries'
@@ -6,27 +7,32 @@ import {QUERY_SINGLE_USER} from '../utils/queries'
 export default function PlayPage() {
     const [isFlipped, setIsFlipped] = useState(false);
 
-    // gets card data from server
-    const { loading, data } = useQuery(QUERY_SINGLE_USER, {
-        variables: { userId:  "65efc7c9acf7312c2ae24ce5" },  //userId
-      });
-    const deck =  data?.user?.decks|| [];
-    const findDecK = deck?.find((arr)=> arr._id ==='65efc7c9acf7312c2ae24cb6');
-
-    const cardsFromData = findDecK?.cards || []
-    console.log(cardsFromData) 
+    const {deckId, userId} = useParams()
+        // gets card data from server
+        const { loading, data } = useQuery(QUERY_SINGLE_USER, {
+            variables: { userId:  userId },  
+        });
+        const deck =  data?.user?.decks|| [];
+        const findDecK = deck?.find((arr)=> arr._id === deckId);
+        const cardsFromData = findDecK?.cards || []
     
 
     let [cards, setCards]= useState([])
     let [wrongDeck, setWrongDeck] = useState([])
     let [index, setIndex]= useState(0)
-    
+
     useEffect(() => {
         setCards(cardsFromData);
     }, [cardsFromData]);
     // resets deck and replays wrongDeck answers
     function resetDeck (){
         setCards(wrongDeck)
+        setWrongDeck([])
+        setIndex(0)
+    }
+    // handles play again functionality
+    function handlePlayAgain(){
+        setCards(cardsFromData)
         setWrongDeck([])
         setIndex(0)
     }
@@ -87,6 +93,12 @@ export default function PlayPage() {
                 <h2>END</h2>
             </figure>
         </div>
+        <section className="play-buttons">
+            <Link to={`/dashboard`}>
+                <button className="">Go Back to Dashboard</button>
+            </Link>
+                    <button className="right" onClick={handlePlayAgain}>Play Again</button>
+            </section>             
     </section>
        ) }
         </>

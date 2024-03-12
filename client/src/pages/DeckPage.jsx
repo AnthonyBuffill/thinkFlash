@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { useParams } from "react-router-dom";
 import '../assets/css/deck.css'
 import { useQuery } from '@apollo/client';
 import {QUERY_SINGLE_USER} from '../utils/queries'
@@ -23,23 +24,22 @@ function Card({frontText, backText}) {
     );
 }
 
-export default function DeckPage() {
-
+export default function DeckPage({}) {
+    const {deckId, userId} = useParams()
         // gets card data from server
         const { loading, data } = useQuery(QUERY_SINGLE_USER, {
-            variables: { userId:  "65efc7c9acf7312c2ae24ce5" },  //userId
+            variables: { userId:  userId },  
         });
         const deck =  data?.user?.decks|| [];
-        const findDecK = deck?.find((arr)=> arr._id ==='65efc7c9acf7312c2ae24cb6');
-    
+        const findDecK = deck?.find((arr)=> arr._id === deckId);
         const cardsFromData = findDecK?.cards || []
-        console.log(cardsFromData) 
         
         let [cards, setCards]= useState([])
-    
-        useEffect(() => {
-            setCards(cardsFromData);
-        }, [cardsFromData]);
+        
+    useEffect(() => {
+        setCards(cardsFromData);
+    }, [cardsFromData]);
+
     return (
         <>
         <main>
@@ -48,13 +48,13 @@ export default function DeckPage() {
                     <a href="/addCard">+ add card</a>
                 </button>
                 <button>
-                    <a href="/play"> play</a>
+                    <a href={`/play/${deckId}/${userId}`}> play</a>
                 </button>
             </section>
 
             <section  className="cards-container">
         {cards && cards.map(card => (
-            <Card key={card._id} frontText={card.frontText} backText={card.backText}/>
+            <Card key={card.frontText} frontText={card.frontText} backText={card.backText}/>
 
           ))}
    
