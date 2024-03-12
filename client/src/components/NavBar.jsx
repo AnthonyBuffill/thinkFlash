@@ -100,7 +100,7 @@ export default function Navbar() {
                             <button onClick={handleDashboardClick}>
                                 DASHBOARD
                             </button>
-                            }
+                    
                             {isLoggedIn ? (
                                 <button onClick={handleLogout}>LOG OUT</button>
                             ) : (
