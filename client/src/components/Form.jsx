@@ -29,10 +29,10 @@ export default function Form(props) {
 
    
     // renders the correct form groups
-    const [formGroup, setFormGroup] = useState(props.formState)
+    const [formGroup, setFormGroup] = useState(props.formState);
     console.log(formGroup);
     // renders the correct form header
-    const [formHeader, setFormHeader] = useState('')
+    const [formHeader, setFormHeader] = useState('');
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -120,6 +120,7 @@ export default function Form(props) {
                 break;
             case actions.addCardFront:
               setFormGroup(actions.addCardBack)
+              setFormHeader('Manual Add Card')
               break;
             case actions.addCardBack:
               setFormGroup(actions.addCardFront)

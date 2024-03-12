@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Form from "../components/Form";
 import { QUERY_CREATECARDS } from "../utils/queries";
 import { useLazyQuery } from "@apollo/client";
@@ -11,9 +11,6 @@ export default function NewDeckPage() {
     const [frontText, setFrontText] = useState('');
     const [backText, setBackText] = useState('');
     
-    const [getCards, { loading, error, data }] = useLazyQuery(QUERY_CREATECARDS,{
-        fetchPolicy: 'network-only'
-    });
     const generateCards = (cardCount)=>{
         console.log(deckInfo, frontText, backText, cardCount);
         cardCount = parseInt(cardCount, 10);
@@ -41,22 +38,34 @@ export default function NewDeckPage() {
             setFlashCards([{frontText: frontText, backText: backText}]);
         }
     }
+    const [getCards, { loading, error, data }] = useLazyQuery(QUERY_CREATECARDS,{
+        fetchPolicy: 'network-only'
+    });
     const [flashCards, setFlashCards] = useState(null);
-    if(data){
-        if(!flashCards)
-            setFlashCards(JSON.parse(data.createCards)['flashcards']);
-        else if(JSON.parse(data.createCards)['flashcards'].length > flashCards.length)
-            setFlashCards(JSON.parse(data.createCards)['flashcards']);
-    }
-    // const flashCards = data?JSON.parse(data.createCards)['flashcards'] : null;
-    const value = (!flashCards)?(loading?'LOADING':'START'):'ADDCARD_FRONT';
+    const [state, setState] = useState('generate');
+    useEffect(() => {
+        if(!loading && data){
+            if(!flashCards){
+                setFlashCards(JSON.parse(data.createCards)['flashcards']);
+                setState('addCard');
+            }
+            else if(JSON.parse(data.createCards)['flashcards'].length > flashCards.length){
+                setFlashCards([
+                    ...flashCards, ...JSON.parse(data.createCards)['flashcards']
+                ]);
+                setState('addCard');
+            }
+        }
+    }, [loading, data]);
+
+    // const value = (!flashCards)?(loading?'LOADING':'START'):'ADDCARD_FRONT';
     return (
     <>
-    {!flashCards && (
-        <Form formState={value} newDeck={{setInfo, setFrontText, setBackText, generateCards, addCard}}></Form>
+    {state === 'generate' && (
+        <Form formState='START' newDeck={{setInfo, setFrontText, setBackText, generateCards, addCard}}></Form>
     )}
-    {flashCards && (
-        <Form formState={value} addCard={{setFrontText, setBackText, addCard}}></Form>
+    {state === 'addCard' && (
+        <Form formState='ADDCARD_FRONT' addCard={{setFrontText, setBackText, addCard}}></Form>
     )}
         <h3 style={styles.title}>{deckInfo.title}</h3>
         {error &&
