@@ -2,9 +2,53 @@ import React, {useState} from "react";
 import '../assets/css/play.css'
 
 export default function PlayPage() {
-    // tracks card's flip state
     const [isFlipped, setIsFlipped] = useState(false);
+    
+    const dummyCards =   [
+        {
+            front: "What is the capital of France?",
+            back: "Paris"
+        },
+        {
+            front: "What is the tallest mountain in the world?",
+            back: "Mount Everest"
+        },
+        {
+            front: "Who wrote 'To Kill a Mockingbird'?",
+            back: "Harper Lee"        
+        }
+       
+    ];
+    let [cards, setCards]= useState(dummyCards)
+    let [wrong, setWrong] = useState([])
+    let [index, setIndex]= useState(0)
+    
 
+    function restDeck (){
+        setCards(wrong)
+        setWrong([])
+        setIndex(0)
+    }
+    // handle correct answer and renders next card
+    const handleCorrectAnswer = () => {
+        if(index < cards.length-1){
+           setIndex(++index)
+        }else{
+          restDeck()
+        }
+        setIsFlipped(false)
+    }
+    //handles wrong answers pushes it to a new deck to go over again
+    const handleWrongAnswer = (card) => {
+        wrong.push(card)
+        setWrong(wrong)
+        if(index < cards.length-1){
+            setIndex(++index)
+        }else{            
+            restDeck()
+        }
+        setIsFlipped(false)
+    }
     // flip card functionality
     const handleFlipCard = () => {
         setIsFlipped(!isFlipped);
@@ -12,25 +56,38 @@ export default function PlayPage() {
 
     return (
         <>
+        {/* render flash cards */}
+       {index <= cards.length-1 ?(
         <section className="play-flip-card-container">
             <div className={`flip-card-inner ${isFlipped ? "flipped" : ""}`} onClick={handleFlipCard}>
                 <figure className="flip-card-front">
-                    <h2>Front Card Question</h2>
+                    <h2>{cards[index].front}</h2>
                 </figure>
                 <figure className="flip-card-back">
-                    <h2>Front Card's Question</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet accusantium cupiditate voluptatibus laborum unde dolorem, alias, fugiat sint minima praesentium odit delectus doloremque earum, recusandae commodi excepturi? Voluptatem, commodi obcaecati!
-                    Quos, est necessitatibus praesentium quis obcaecati labore exercitationem doloremque ad officia iusto beatae possimus sequi excepturi fugit minus aliquam dolorem nulla. Officia, velit obcaecati eligendi earum laudantium assumenda ex quis!
-                    Nesciunt magnam eos totam, quis, illum ab aperiam facere fugiat ex quia corporis debitis saepe ipsa dignissimos, voluptas recusandae nisi cupiditate. Quam iure voluptatum magnam, quisquam adipisci illum cum atque?</p>
+                    <h2>{cards[index].front}</h2>
+                    <p>{cards[index].back}</p>
                 </figure>
             </div>
             {isFlipped &&
             <section className="play-buttons">
-                <button className="wrong">wrong</button>
-                <button className="right">right</button>
+                <button className="wrong"onClick={() =>handleWrongAnswer(cards[index])}>wrong</button>
+                <button className="right" onClick={handleCorrectAnswer}>right</button>
             </section>                 
-            }
+           }
         </section>
+       ):(
+        /// End of Cards Visual
+        <section className="play-flip-card-container">
+        <div className={`flip-card-inner ${isFlipped ? "flipped" : ""}`} onClick={handleFlipCard}>
+            <figure className="flip-card-front">
+                <h2>END</h2>
+            </figure>
+            <figure className="flip-card-back">
+                <h2>END</h2>
+            </figure>
+        </div>
+    </section>
+       ) }
         </>
     )
 }

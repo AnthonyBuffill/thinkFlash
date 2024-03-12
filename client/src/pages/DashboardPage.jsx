@@ -1,9 +1,17 @@
-import React from "react";
+import React ,{useParams}from "react";
 import DeckStack from "../components/DeckStack";
+import { useQuery } from '@apollo/client';
 import '../assets/css/dashboard.css'
-export default function DashboardPage() {
+import {QUERY_SINGLE_USER} from '../utils/queries'
 
-    const title = 'TITLE EXAMPLE'
+export default  function DashboardPage() {
+
+   
+    const { loading, data } = useQuery(QUERY_SINGLE_USER, {
+        variables: { userId:  "65ef5f7f0e86df84e6e43006" }, 
+      });
+  const decks =  data?.user?.decks || [];
+
     return (
         <>
         <main>
@@ -13,8 +21,9 @@ export default function DashboardPage() {
                 </button>
             </section>
             <section className="decks-container">
-
-           <DeckStack title ={title}/>
+            {decks.map(deck => (
+            <DeckStack key={deck._id} title={deck.title} />
+          ))}
             </section>
             <section>
 
