@@ -64,15 +64,26 @@ const {
 
         return { token, user };
       },
-      addDeck: async (parent, { title, description }) => {
-        const deck = await Deck.create({ title, description });
+      addDeck: async (parent, { title, description, cardData }) => {
+        try{
+          console.log(cardData);
+          let cards = [];
+          if(cardData){
+            cards = JSON.parse(cardData);
+          }
+          const createdCards = await Card.create(cards);
+          const cardIds = createdCards.map(card => card._id);
+          const deck = await Deck.create({ title, description, cards:cardIds });
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          return deck;
+        }catch(error){
+          return error;
+        }
+        // await User.findOneAndUpdate(
+        //   { _id: req.params._id  },
+        //   { $addToSet: { decks: deck._id } }
+        // );
   
-        await User.findOneAndUpdate(
-          { _id: req.params._id  },
-          { $addToSet: { decks: deck._id } }
-        );
-  
-        return deck;
       },
       addCard: async (parent, { deckId, frontText, backText }) => {
         return Deck.findOneAndUpdate(

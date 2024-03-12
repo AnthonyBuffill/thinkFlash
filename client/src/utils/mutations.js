@@ -25,17 +25,9 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_DECK = gql`
-  mutation addDeck($title: String!, $description: String!) {
-    addDeck(title: $title, description: $description) {
+  mutation addDeck($title: String!, $description: String!, $cardData: String) {
+    addDeck(title: $title, description: $description, cardData: $cardData) {
       _id
-      title
-      description
-      cards {
-        _id
-        frontText
-        backText
-        createdAt
-      }
     }
   }
 `;

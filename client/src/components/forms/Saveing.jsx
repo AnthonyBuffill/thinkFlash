@@ -1,8 +1,8 @@
 import '../../assets/css/loading.css';
-export default function Loading (){
+export default function Saveing ({text}){
   return (
   <div style={styles.container}>
-      <h1 style={styles.loading}>Generating Learning Opportunities</h1>
+      <h1 style={styles.loading}>{text}</h1>
       <div>
         <div style={styles.spinner}></div>
       </div>

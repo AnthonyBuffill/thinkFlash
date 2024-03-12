@@ -46,13 +46,20 @@
     justify-content: space-around;
     margin-top: 50px ;
   }
+  .play-buttons a{
+    text-decoration: none;
+    color: var(--brownColor)
+  }
   .play-buttons button{
     border-radius: 10px;
     height: 35px;
     font-size: x-large;
   }
+  .play-buttons button:nth-child(1){
+    background-color: var(--orangeColor);
+  }
   .wrong{
-    background-color: var(--redColor);
+    background-color: var(--redColor) !important;
   }
   .right{
     background-color: var(--blueColor);
