@@ -9,8 +9,8 @@ const {
       users: async () => {
         return User.find().populate('decks');
       },
-      user: async (parent, { username }) => {
-        return User.findOne({ username }).populate(
+      user: async (parent, { userId }) => {
+        return User.findOne({ _id: userId}).populate(
           {
             path:'decks',
             populate: {
