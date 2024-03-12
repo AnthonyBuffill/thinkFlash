@@ -36,7 +36,7 @@ type Query {
 type Mutation {
   addUser(username: String!, email: String!, password: String!): Auth
   login(email: String!, password: String!): Auth
-  addDeck(title: String!, description: String!): Deck
+  addDeck(title: String!, description: String!, cardData: String): Deck
   addCard(
     deckId: ID!
     frontText: String!

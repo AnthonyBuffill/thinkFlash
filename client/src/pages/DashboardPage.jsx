@@ -8,7 +8,7 @@ export default  function DashboardPage() {
 
    
     const { loading, data } = useQuery(QUERY_SINGLE_USER, {
-        variables: { userId:  "65ef5f7f0e86df84e6e43006" }, 
+        variables: { userId:  "65ee15685e94e38a2022e7e2" }, 
       });
   const decks =  data?.user?.decks || [];
 

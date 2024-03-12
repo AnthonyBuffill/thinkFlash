@@ -1,9 +1,23 @@
 import { useEffect, useState } from "react";
 import Form from "../components/Form";
 import { QUERY_CREATECARDS } from "../utils/queries";
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { ADD_DECK } from "../utils/mutations";
 export default function NewDeckPage() {
     
+    const [addDeckMutation, addDeckObj] = useMutation(ADD_DECK);
+    const saveDeck = () =>{
+        if(!flashCards)
+            return;
+
+        addDeckMutation({
+            variables : {
+                title:deckInfo.title,
+                description: deckInfo.description,
+                cardData: JSON.stringify(flashCards)
+            },
+        });
+    }
     const [deckInfo, setInfo] = useState({
         title:'',
         description: '',
@@ -12,23 +26,18 @@ export default function NewDeckPage() {
     const [backText, setBackText] = useState('');
     
     const generateCards = (cardCount)=>{
-        console.log(deckInfo, frontText, backText, cardCount);
         cardCount = parseInt(cardCount, 10);
         if(isNaN(cardCount))
             cardCount = 10;
-
-        getCards({variables: { 
-        title: deckInfo.title, 
-        frontText:frontText, 
-        backText: backText,
-        cardCount: cardCount
-        }});
+        const variables = { 
+            title: deckInfo.title, 
+            frontText:frontText, 
+            backText: backText,
+            cardCount: cardCount
+            };
+        console.log(variables)
+        getCards({variables});
     }
-    if(data)
-        console.log(data);
-  
-    if(error)
-        console.log(error);
     const addCard = () =>{
         if(flashCards){
             setFlashCards([
@@ -37,19 +46,23 @@ export default function NewDeckPage() {
         }else{
             setFlashCards([{frontText: frontText, backText: backText}]);
         }
+        setState('addCard');
     }
     const [getCards, { loading, error, data }] = useLazyQuery(QUERY_CREATECARDS,{
         fetchPolicy: 'network-only'
     });
     const [flashCards, setFlashCards] = useState(null);
     const [state, setState] = useState('generate');
+    const setBackToGenerate = () =>{
+        setState('generate');
+    };
     useEffect(() => {
         if(!loading && data){
             if(!flashCards){
                 setFlashCards(JSON.parse(data.createCards)['flashcards']);
                 setState('addCard');
             }
-            else if(JSON.parse(data.createCards)['flashcards'].length > flashCards.length){
+            else{
                 setFlashCards([
                     ...flashCards, ...JSON.parse(data.createCards)['flashcards']
                 ]);
@@ -57,16 +70,33 @@ export default function NewDeckPage() {
             }
         }
     }, [loading, data]);
+    useEffect(()=>{
+        console.log(addDeckObj);
+        if(!addDeckObj.loading){
+            if(addDeckObj.data){
+                const id = addDeckObj.data.addDeck._id;
+                console.log("DECK ID: " + id);
+            }
+            if(addDeckObj.error){
+                console.log("Error Saving deck");
+            }
+        }
+    }, [addDeckObj]);
 
-    // const value = (!flashCards)?(loading?'LOADING':'START'):'ADDCARD_FRONT';
+    let value = 'START';
+    if(state === 'addCard')
+        value = 'ADDCARD_FRONT';
+    else if(flashCards)
+        value = 'GENERATE';
     return (
     <>
     {state === 'generate' && (
-        <Form formState='START' newDeck={{setInfo, setFrontText, setBackText, generateCards, addCard}}></Form>
+        <Form formState={value} newDeck={{setInfo, setFrontText, setBackText, generateCards, addCard}}></Form>
     )}
     {state === 'addCard' && (
-        <Form formState='ADDCARD_FRONT' addCard={{setFrontText, setBackText, addCard}}></Form>
+        <Form formState={value} addCard={{setFrontText, setBackText, addCard, setBackToGenerate}}></Form>
     )}
+        <button onClick={saveDeck}>Save Deck</button>
         <h3 style={styles.title}>{deckInfo.title}</h3>
         {error &&
         <h2>Issue with createing Flash Cards.</h2>
