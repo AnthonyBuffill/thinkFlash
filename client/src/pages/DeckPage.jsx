@@ -3,26 +3,7 @@ import { useParams } from "react-router-dom";
 import '../assets/css/deck.css'
 import { useQuery } from '@apollo/client';
 import {QUERY_SINGLE_USER} from '../utils/queries'
-
-function Card({frontText, backText}) {
-    const [isFlipped, setIsFlipped] = useState(false);
-    const handleFlipCard = () => {
-        setIsFlipped(!isFlipped);
-    };
-
-    return (
-        <section className="deck-flip-card-container" onClick={handleFlipCard}>
-            <div className={`flip-card-inner ${isFlipped ? "flipped" : ""}`} >
-                <figure className="flip-card-front">
-                    <h3>{frontText}</h3>
-                </figure>
-                <figure className="flip-card-back">
-                    <p>{backText}</p>
-                </figure>
-            </div>
-        </section>
-    );
-}
+import Card from "../components/Card";
 
 export default function DeckPage({}) {
     const {deckId, userId} = useParams()
