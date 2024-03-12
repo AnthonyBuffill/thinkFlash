@@ -3,8 +3,13 @@ import Form from "../components/Form";
 import { QUERY_CREATECARDS } from "../utils/queries";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { ADD_DECK } from "../utils/mutations";
+import { useNavigate, useParams } from 'react-router-dom';
+
 export default function NewDeckPage() {
     let temp = [];
+    const { userID } = useParams();
+    console.log(userID);
+    const navigate = useNavigate();
     const [addDeckMutation, addDeckObj] = useMutation(ADD_DECK);
     const saveDeck = () =>{
         if(!flashCards)
@@ -38,7 +43,7 @@ export default function NewDeckPage() {
             frontText:frontText, 
             backText: backText,
             cardCount: cardCount
-            };
+        };
         
         getCards({variables});
     }
@@ -62,13 +67,25 @@ export default function NewDeckPage() {
     };
     useEffect(() => {
         if(!loading && data){
+            
+            const createCards = JSON.parse(data.createCards);
+            
+            if(createCards.message !== undefined)
+            {
+                console.log(createCards.message);
+                navigate(`/login`);
+                return;
+            }
+            let cards = createCards.flashCards;
+            if(cards === undefined)
+                cards = createCards.flashcards;
             if(!flashCards){
-                setFlashCards(JSON.parse(data.createCards)['flashcards']);
+                setFlashCards(cards);
                 setState('addCard');
             }
             else{
                 setFlashCards([
-                    ...flashCards, ...JSON.parse(data.createCards)['flashcards']
+                    ...flashCards, ...cards
                 ]);
                 setState('addCard');
             }
@@ -80,6 +97,8 @@ export default function NewDeckPage() {
                 const id = addDeckObj.data.addDeck._id;
                 console.log("DECK ID: " + id);
                 setState('generate');
+                navigate(`/deck/${id}/${userID}`);
+                return;
             }
             if(addDeckObj.error){
                 console.log("Error Saving deck");
