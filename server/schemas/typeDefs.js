@@ -4,7 +4,7 @@ type User {
   username: String
   email: String
   password: String
-  decks: [Deck]!
+  decks: [Deck]
 }
 type Deck {
   _id: ID
@@ -20,7 +20,7 @@ type Card {
   createdAt: String
 }
 type Auth {
-  token: ID!
+  token: ID! 
   user: User
 }
 

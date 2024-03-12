@@ -64,7 +64,7 @@ const {
 
         return { token, user };
       },
-      addDeck: async (parent, { frontText, backText }) => {
+      addDeck: async (parent, { title, description }) => {
         const deck = await Deck.create({ title, description });
   
         await User.findOneAndUpdate(
