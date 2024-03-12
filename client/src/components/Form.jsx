@@ -7,6 +7,7 @@ import DashboardPage from '../pages/DashboardPage';
 import Auth from '../utils/auth';
 import AddDeckForm from "./forms/AddDeckForm";
 import Loading from "./forms/Loading";
+import AddCardForm from "./forms/AddCardForm";
 
 export default function Form(props) {
     // vars for different form states
@@ -19,7 +20,8 @@ export default function Form(props) {
         generate: 'GENERATE',
         loading: 'LOADING',
       },
-        addCard: 'ADDCARD',
+        addCardFront: 'ADDCARD_FRONT',
+        addCardBack: 'ADDCARD_BACK',
         login: 'LOGIN',
         signup: 'SIGNUP',
         addDeck: '',
@@ -101,7 +103,7 @@ export default function Form(props) {
 
     // changes form state for --Generate New Deck-- Form on click
     const handleFormGroup = (e) => {
-      e.preventDefault();
+      // e.preventDefault();
         switch(formGroup){
             case actions.generateDeck.start:
                 setFormGroup(actions.generateDeck.front)
@@ -116,6 +118,12 @@ export default function Form(props) {
             case actions.generateDeck.generate:
                 setFormGroup(actions.generateDeck.loading)
                 break;
+            case actions.addCardFront:
+              setFormGroup(actions.addCardBack)
+              break;
+            case actions.addCardBack:
+              setFormGroup(actions.addCardFront)
+              break;
             default:
                 console.log('invalid value')
             
@@ -126,7 +134,7 @@ export default function Form(props) {
     return(
         <>
         <section className="form-container">
-            <form>
+            <form onSubmit={(e)=>{e.preventDefault()}}>
                 <header>
                     <h2>{formHeader}</h2>
                 </header>
@@ -212,24 +220,25 @@ export default function Form(props) {
                       <Loading />
                     )}
                     {/* ADD A NEW CARD FORM */}
-                    {formGroup === actions.addCard &&
-                    <section className="form-group">
-                        <div className="form-label-group">
-                            <label htmlFor="">Front of Card</label>
-                            <input type="text" />
-                        </div>
-                        <div className="form-label-group">
-                            <label htmlFor="">Back of Card</label>
-                            <textarea name="" id="" cols="30" rows="7"></textarea>
-                        </div>
-                        <section className="btn-container">
-                            <button>Add Another Card</button>
-                            <button className="addCardDoneBtn">
-                            <a href="/dashboard">Done</a>  
-                            </button>
-                        </section>
-                    </section>                
-                    }
+                    {(formGroup === actions.addCardFront || formGroup === actions.addCardBack) &&(
+                      <AddCardForm onClick={handleFormGroup} state={formGroup} actions={actions} addCardProps={props.addCard} />
+                    // <section className="form-group">
+                    //     <div className="form-label-group">
+                    //         <label htmlFor="">Front of Card</label>
+                    //         <input type="text" />
+                    //     </div>
+                    //     <div className="form-label-group">
+                    //         <label htmlFor="">Back of Card</label>
+                    //         <textarea name="" id="" cols="30" rows="7"></textarea>
+                    //     </div>
+                    //     <section className="btn-container">
+                    //         <button>Add Another Card</button>
+                    //         <button className="addCardDoneBtn">
+                    //         <a href="/dashboard">Done</a>  
+                    //         </button>
+                    //     </section>
+                    // </section>                
+                    )}
                 </div>
               
             </form>

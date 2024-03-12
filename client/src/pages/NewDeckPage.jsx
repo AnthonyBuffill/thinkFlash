@@ -32,20 +32,31 @@ export default function NewDeckPage() {
   
     if(error)
         console.log(error);
-
-    const [flashCards, addCard] = useState(null);
+    const addCard = () =>{
+        if(flashCards){
+            setFlashCards([
+                ...flashCards, {frontText: frontText, backText: backText}
+            ]);
+        }else{
+            setFlashCards([{frontText: frontText, backText: backText}]);
+        }
+    }
+    const [flashCards, setFlashCards] = useState(null);
     if(data){
         if(!flashCards)
-            addCard(JSON.parse(data.createCards)['flashcards']);
-        else if(JSON.parse(data.createCards)['flashcards'].length !== flashCards.length)
-            addCard(JSON.parse(data.createCards)['flashcards']);
+            setFlashCards(JSON.parse(data.createCards)['flashcards']);
+        else if(JSON.parse(data.createCards)['flashcards'].length > flashCards.length)
+            setFlashCards(JSON.parse(data.createCards)['flashcards']);
     }
     // const flashCards = data?JSON.parse(data.createCards)['flashcards'] : null;
-    const value = loading?'LOADING':'START';
+    const value = (!flashCards)?(loading?'LOADING':'START'):'ADDCARD_FRONT';
     return (
     <>
     {!flashCards && (
-        <Form formState={value} newDeck={{setInfo, setFrontText, setBackText, generateCards}}></Form>
+        <Form formState={value} newDeck={{setInfo, setFrontText, setBackText, generateCards, addCard}}></Form>
+    )}
+    {flashCards && (
+        <Form formState={value} addCard={{setFrontText, setBackText, addCard}}></Form>
     )}
         <h3 style={styles.title}>{deckInfo.title}</h3>
         {error &&
