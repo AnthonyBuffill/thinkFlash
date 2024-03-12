@@ -6,7 +6,10 @@
     gap: 20px;
     justify-content: space-around;
 }
-
+.decks-container a{
+    text-decoration: none;
+    color: var(--brownColor);
+}
 
 
 .outerDeckStack{
