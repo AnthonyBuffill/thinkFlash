@@ -94,7 +94,7 @@ export default function PlayPage() {
             </figure>
         </div>
         <section className="play-buttons">
-            <Link to={`/dashboard`}>
+            <Link to={`/dashboard/${userId}`}>
                 <button className="">Go Back to Dashboard</button>
             </Link>
                     <button className="right" onClick={handlePlayAgain}>Play Again</button>
