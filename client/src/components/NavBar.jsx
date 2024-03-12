@@ -11,6 +11,7 @@ export default function Navbar() {
     const [menuBtn, setMenuButton] = useState(menuOpen)
     const [showMenu, setShowMenu] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn()); // Check if the user is initially logged in
+
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
 
@@ -64,7 +65,8 @@ export default function Navbar() {
           setShowModal(true);
         } else {
           // Navigate to dashboard
-          navigate('/dashboard/${Auth.getUser()?.data._id}');
+          {Auth.loggedIn() &&
+          navigate('/dashboard/${Auth.getUser()?.data._id}')};
         }
       };
     
@@ -96,6 +98,7 @@ export default function Navbar() {
                             <button>
                                 <Link to={'/'}>ABOUT</Link>
                             </button>
+
                         
                             <button onClick={handleDashboardClick}>
                                 DASHBOARD

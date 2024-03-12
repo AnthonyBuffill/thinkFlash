@@ -1,10 +1,11 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import { useParams } from "react-router-dom";
 import '../assets/css/deck.css'
+import { useQuery } from '@apollo/client';
+import {QUERY_SINGLE_USER} from '../utils/queries'
 
-
-function Card() {
+function Card({frontText, backText}) {
     const [isFlipped, setIsFlipped] = useState(false);
-
     const handleFlipCard = () => {
         setIsFlipped(!isFlipped);
     };
@@ -13,17 +14,31 @@ function Card() {
         <section className="deck-flip-card-container" onClick={handleFlipCard}>
             <div className={`flip-card-inner ${isFlipped ? "flipped" : ""}`} >
                 <figure className="flip-card-front">
-                    <h3>Front Card Question</h3>
+                    <h3>{frontText}</h3>
                 </figure>
                 <figure className="flip-card-back">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet accusantium cupiditate voluptatibus laborum unde dolorem, alias, fugiat sint minima praesentium odit delectus doloremque earum, recusandae commodi excepturi? Voluptatem, commodi obcaecati!</p>
+                    <p>{backText}</p>
                 </figure>
             </div>
         </section>
     );
 }
 
-export default function DeckPage() {
+export default function DeckPage({}) {
+    const {deckId, userId} = useParams()
+        // gets card data from server
+        const { loading, data } = useQuery(QUERY_SINGLE_USER, {
+            variables: { userId:  userId },  
+        });
+        const deck =  data?.user?.decks|| [];
+        const findDecK = deck?.find((arr)=> arr._id === deckId);
+        const cardsFromData = findDecK?.cards || []
+        
+        let [cards, setCards]= useState([])
+        
+    useEffect(() => {
+        setCards(cardsFromData);
+    }, [cardsFromData]);
 
     return (
         <>
@@ -33,20 +48,16 @@ export default function DeckPage() {
                     <a href="/addCard">+ add card</a>
                 </button>
                 <button>
-                    <a href="/play"> play</a>
+                    <a href={`/play/${deckId}/${userId}`}> play</a>
                 </button>
             </section>
 
             <section  className="cards-container">
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
+        {cards && cards.map(card => (
+            <Card key={card.frontText} frontText={card.frontText} backText={card.backText}/>
+
+          ))}
+   
             </section>
             
         </main>

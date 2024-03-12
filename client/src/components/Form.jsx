@@ -7,6 +7,8 @@ import DashboardPage from '../pages/DashboardPage';
 import AuthService from '../utils/auth';
 import AddDeckForm from "./forms/AddDeckForm";
 import Loading from "./forms/Loading";
+import AddCardForm from "./forms/AddCardForm";
+import Saveing from "./forms/Saveing";
 
 export default function Form(props) {
     // vars for different form states
@@ -19,18 +21,19 @@ export default function Form(props) {
         generate: 'GENERATE',
         loading: 'LOADING',
       },
-        addCard: 'ADDCARD',
+        addCardFront: 'ADDCARD_FRONT',
+        addCardBack: 'ADDCARD_BACK',
         login: 'LOGIN',
         signup: 'SIGNUP',
-        addDeck: '',
+        saveing: 'SAVEING',
+        finished: 'FINISHED'
     };
 
    
     // renders the correct form groups
-    const [formGroup, setFormGroup] = useState(props.formState)
-    console.log(formGroup);
+    const [formGroup, setFormGroup] = useState(props.formState);
     // renders the correct form header
-    const [formHeader, setFormHeader] = useState('')
+    const [formHeader, setFormHeader] = useState('');
 
     const [email, setEmail] = useState('');
     const [username, setUsername]= useState('')
@@ -44,22 +47,34 @@ export default function Form(props) {
     // sets form headers for each form type
     useEffect(() => {
         switch(formGroup){
-            case actions.addCard:
-                setFormHeader('Add New Card')
+            case actions.addCardFront:
+                setFormHeader('Create New Card');
                 break;
             case actions.generateDeck.start:
-                setFormHeader('Create New Deck')
+                setFormHeader('Create New Deck');
                 break;
+            case actions.generateDeck.generate:
+              setFormHeader('Generate Cards');
+              break;
+            case actions.generateDeck.loading:
+              setFormHeader('Loading');
+              break;
             case actions.login:
-                setFormHeader('Login Form')
+                setFormHeader('Login Form');
                 break;
             case actions.signup:
-                setFormHeader('Sign Up Form')
+                setFormHeader('Sign Up Form');
                 break;
+            case actions.saveing:
+              setFormHeader(props.saveing.title);
+              break;
+            case actions.finished:
+              setFormHeader('Complete');
+              break;
             default:
                 return                
         }
-      }, [])
+      }, [formGroup])
 
       const handleLoginSubmit = async (e) => {
         e.preventDefault();
@@ -71,7 +86,7 @@ export default function Form(props) {
             const token = data.login.token;
             AuthService.login(token);
             setIsLoggedIn(true);
-            navigate.push('/DashboardPage');
+            navigate(`/dashboard/${data.login.user._id}`);
           }
         } catch (error) {
           console.error(error);
@@ -95,7 +110,7 @@ export default function Form(props) {
             const token = data.addUser.token;
             AuthService.login(token);
             setIsLoggedIn(true);
-            navigate.push('/DashboardPage');
+            navigate(`/dashboard/${data.login.user._id}`);
           }
         } catch (error) {
           console.error(error);
@@ -109,7 +124,7 @@ export default function Form(props) {
 
     // changes form state for --Generate New Deck-- Form on click
     const handleFormGroup = (e) => {
-      e.preventDefault();
+      // e.preventDefault();
         switch(formGroup){
             case actions.generateDeck.start:
                 setFormGroup(actions.generateDeck.front)
@@ -119,11 +134,17 @@ export default function Form(props) {
                 break;
             case actions.generateDeck.back:
                 setFormGroup(actions.generateDeck.generate)
-                setFormHeader('Generate Deck')
                 break;
             case actions.generateDeck.generate:
                 setFormGroup(actions.generateDeck.loading)
+                setFormHeader('Generating Cards...');
                 break;
+            case actions.addCardFront:
+              setFormGroup(actions.addCardBack)
+              break;
+            case actions.addCardBack:
+              setFormGroup(actions.addCardFront)
+              break;
             default:
                 console.log('invalid value')
             
@@ -212,72 +233,22 @@ export default function Form(props) {
               </section>
                    )}
                      {/* Create subject and Description */}
-                    {formGroup === actions.start && 
-                    <AddDeck  onClick={handleFormGroup}></AddDeck>
-                    
-                    }
-                    {/*  ENTER FIRST QUESTION*/}
-                    {formGroup === actions.generateDeck.front &&
-                    <section className="form-group">
-                        <div className="form-label-group">
-                            <label htmlFor="">Enter question </label>
-                            <input className="" type="text" name="" id="" />
-                            <small>(front of card)</small>
-                        </div>
-                        <button onClick={handleFormGroup}>next</button>
-                    </section>
-                    }
-                    {/* ENTER ANSWER */}
-                    {formGroup === actions.generateDeck.back &&
-                    <section className="form-group">
-                        <label htmlFor="">Enter answer </label>
-                        <textarea name="" id="" cols="30" rows="7"></textarea>
-                        <small>(back of card)</small>
-                        <button onClick={handleFormGroup}>next</button>
-                    </section>      
-                    }
-                    {/* GENERATE NEW DECK FORM OR CREATE OWN */}
-                    {formGroup === actions.generateDeck.generate &&
-                        <section className="form-group">
-                            <div className="select-group">
-                                <label htmlFor="">How many cards would you like to generate?</label>
-                                <select  >
-                                    <option value="" selected>select</option>
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                    <option value="40">40</option>
-                                </select>
-                            </div>
-                            <section className="form-submit">
-                                <button>generate deck</button>
-                            </section>
-                            <a href="addCard">No thank's I'll create my own</a>
-                        </section>
-                    }
-                    {/* END OF CREATE DECK FORM */}
+                     {(formGroup === actions.generateDeck.start || formGroup === actions.generateDeck.front||formGroup === actions.generateDeck.back || formGroup === actions.generateDeck.generate) && (
+                      <AddDeckForm onClick={handleFormGroup} state={formGroup} actions={actions} newDeck={props.newDeck}/>
+                      
+                    )}
+                    {formGroup === actions.generateDeck.loading && (
                     
                       <Loading />
-                  
+                    )}
+                    {formGroup === actions.saveing && (
+                    
+                      <Saveing text={props.saveing.text} />
+                    )}
                     {/* ADD A NEW CARD FORM */}
-                    {formGroup === actions.addCard &&
-                    <section className="form-group">
-                        <div className="form-label-group">
-                            <label htmlFor="">Front of Card</label>
-                            <input type="text" />
-                        </div>
-                        <div className="form-label-group">
-                            <label htmlFor="">Back of Card</label>
-                            <textarea name="" id="" cols="30" rows="7"></textarea>
-                        </div>
-                        <section className="btn-container">
-                            <button>Add Another Card</button>
-                            <button className="addCardDoneBtn">
-                            <a href="/dashboard">Done</a>  
-                            </button>
-                        </section>
-                    </section>                
-                    }
+                    {(formGroup === actions.addCardFront || formGroup === actions.addCardBack) &&(
+                      <AddCardForm onClick={handleFormGroup} state={formGroup} actions={actions} addCardProps={props.addCard} />             
+                    )}
                 </div>
               
             </form>
