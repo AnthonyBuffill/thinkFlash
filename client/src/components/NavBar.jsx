@@ -65,7 +65,8 @@ export default function Navbar() {
           setShowModal(true);
         } else {
           // Navigate to dashboard
-          navigate('/dashboard/${Auth.getUser()?.data._id}');
+          {Auth.loggedIn() &&
+          navigate('/dashboard/${Auth.getUser()?.data._id}')};
         }
       };
     
@@ -102,9 +103,7 @@ export default function Navbar() {
                             <button onClick={handleDashboardClick}>
                                 DASHBOARD
                             </button>
-                            
-                       
-
+                    
                             {isLoggedIn ? (
                                 <button onClick={handleLogout}>LOG OUT</button>
                             ) : (
