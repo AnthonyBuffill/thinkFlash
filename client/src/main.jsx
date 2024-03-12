@@ -2,6 +2,7 @@ import React from 'react'
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App.jsx'
+import Modal from './components/Modal.jsx';  //Modal component
 //pages
 import AboutPage from './pages/AboutPage.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
@@ -16,10 +17,12 @@ import './assets/css/resets.css'
 import './assets/css/index.css'
 
 
+
 const router = (
   <Routes>
     <Route path="/" element={<App />}>
       <Route index element={<AboutPage />} />
+      <Route path="modal" element={<Modal/>} />
       <Route path="dashboard" element={<DashboardPage/>} />
       <Route path="deck" element={<DeckPage/>} />
       <Route path="dashboard/:deckId" element={<DashboardPage/>} />

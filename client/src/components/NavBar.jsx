@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../assets/css/navbar.css';
 import Auth from '../utils/auth';
+import Modal from "./Modal";
 
 
 export default function Navbar() {
@@ -10,9 +11,11 @@ export default function Navbar() {
     const [menuBtn, setMenuButton] = useState(menuOpen)
     const [showMenu, setShowMenu] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn()); // Check if the user is initially logged in
-
+    const [showModal, setShowModal] = useState(false);
+    const navigate = useNavigate();
 
     const maxSmallScreen = 600;
+    
     useEffect(() => {
         const handleResize = () => {
 
@@ -50,7 +53,26 @@ export default function Navbar() {
     const handleLogout = () => {
         Auth.logout();
         setIsLoggedIn(false);
+        navigate('/');
     };
+
+    const handleDashboardClick = () => {
+
+        if (!isLoggedIn) {
+   
+          // Show modal and prevent navigation
+          setShowModal(true);
+        } else {
+          // Navigate to dashboard
+          navigate('/dashboard/${Auth.getUser()?.data._id}');
+        }
+      };
+    
+      const handleModalClose = () => {
+        // Close the modal and navigate to signup page
+        setShowModal(false);
+        navigate('/signup');
+      };
 
 
     return (
@@ -74,9 +96,11 @@ export default function Navbar() {
                             <button>
                                 <Link to={'/'}>ABOUT</Link>
                             </button>
-                            <button>
-                                <Link to={'/dashboard'}>DASHBOARD</Link>
+                        
+                            <button onClick={handleDashboardClick}>
+                                DASHBOARD
                             </button>
+                            }
                             {isLoggedIn ? (
                                 <button onClick={handleLogout}>LOG OUT</button>
                             ) : (
@@ -93,6 +117,14 @@ export default function Navbar() {
                     }
                 </nav>
             </div>
+
+            {showModal && (
+        <Modal onClose={handleModalClose}>
+
+          <p>You must be logged in to access this feature.</p>
+          <button onClick={handleModalClose}>Sign Up</button>
+        </Modal>
+      )}
         </>
-    )
+    );
 }
