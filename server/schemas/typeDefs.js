@@ -26,7 +26,7 @@ type Auth {
 
 type Query {
   users: [User]
-  user(username: String!): User
+  user(userId: ID): User
   decks(username: String): [Deck]
   deck(deckId: ID!): Deck
   card(cardId: ID!): Card
