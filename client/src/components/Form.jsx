@@ -28,7 +28,6 @@ export default function Form(props) {
    
     // renders the correct form groups
     const [formGroup, setFormGroup] = useState(props.formState)
-    console.log(formGroup);
     // renders the correct form header
     const [formHeader, setFormHeader] = useState('')
 
@@ -71,7 +70,7 @@ export default function Form(props) {
             const token = data.login.token;
             AuthService.login(token);
             setIsLoggedIn(true);
-            navigate.push('/DashboardPage');
+            navigate(`/dashboard/${data.login.user._id}`);
           }
         } catch (error) {
           console.error(error);
@@ -95,7 +94,7 @@ export default function Form(props) {
             const token = data.addUser.token;
             AuthService.login(token);
             setIsLoggedIn(true);
-            navigate.push('/DashboardPage');
+            navigate(`/dashboard/${data.login.user._id}`);
           }
         } catch (error) {
           console.error(error);

@@ -20,7 +20,7 @@ const router = (
   <Routes>
     <Route path="/" element={<App />}>
       <Route index element={<AboutPage />} />
-      <Route path="dashboard/" element={<DashboardPage/>} />
+      <Route path="dashboard/:userId" element={<DashboardPage/>} />
       <Route path="deck" element={<DeckPage/>} />
       <Route path="deck/:deckId/:userId" element={<DeckPage/>} />
       <Route path="newDeck" element={<NewDeckPage/>} />

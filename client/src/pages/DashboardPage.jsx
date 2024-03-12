@@ -1,12 +1,12 @@
-import React ,{useParams}from "react";
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link, useParams } from 'react-router-dom';
 import DeckStack from "../components/DeckStack";
 import { useQuery } from '@apollo/client';
 import '../assets/css/dashboard.css'
 import {QUERY_SINGLE_USER} from '../utils/queries'
 
 export default  function DashboardPage() {
-    let userId ="65efc7c9acf7312c2ae24ce5" 
+    let {userId} = useParams() 
     const { loading, data } = useQuery(QUERY_SINGLE_USER, {
         variables: { userId: userId  }, 
       });

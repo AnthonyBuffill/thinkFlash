@@ -11,7 +11,7 @@ export default function Navbar() {
     const [showMenu, setShowMenu] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn()); // Check if the user is initially logged in
 
-
+console.log({Auth})
     const maxSmallScreen = 600;
     useEffect(() => {
         const handleResize = () => {
@@ -74,9 +74,11 @@ export default function Navbar() {
                             <button>
                                 <Link to={'/'}>ABOUT</Link>
                             </button>
+                                {Auth.loggedIn() &&
                             <button>
-                                <Link to={'/dashboard'}>DASHBOARD</Link>
+                                <Link to={`/dashboard/${Auth.getUser()?.data._id}`}>DASHBOARD</Link>
                             </button>
+                                }
                             {isLoggedIn ? (
                                 <button onClick={handleLogout}>LOG OUT</button>
                             ) : (
