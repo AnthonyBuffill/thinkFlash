@@ -11,19 +11,29 @@ export default function AboutPage() {
               textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}> Where <span style= {{fontSize: '70px', color: '#FFE3A1',
               textShadow: '2px 2px 4px rgba(6, 155, 161, 1.0)', }}>Intelligence </span><br/>meets <span style= {{fontSize: '70px', color: '#FFE3A1',
               textShadow: '2px 2px 4px rgba(6, 155, 161, 1.0)', }}>Intuition</span> in <br/>the world <br/>of <span style= {{fontSize: '70px', color: '#FFE3A1',
-              textShadow: '2px 2px 4px rgba(6, 155, 161, 1.0)', }}>Digital Learning</span>.</div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '130px', fontSize: '150%', color: 'rgb(6, 155, 161)', 
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)'}}> Experience a new way to learn with our flash cards generated with the power of AI, personalized to your desired content, the power to create the optimum enviroment to meet your needs in whatever landscape of your choosing, you can seemglessly create a deck of flash cards for all your studying preparation and entertainment needs</div>
-      <div >
+              textShadow: '2px 2px 4px rgba(6, 155, 161, 1.0)', }}>Digital learning</span>.
+      </div>
+       <div style={{ display: 'flex', justifyContent: 'space-between', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+        padding: '130px',
+        fontSize: '150%', 
+        color: 'rgb(6, 155, 161)',textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)'}}> Experience a new way to learn with our flash cards generated with the power of AI, personalized to your desired content, the power to create the optimum enviroment to meet your needs in whatever landscape of your choosing, you can seemglessly create a deck of flash cards for all your studying preparation and entertainment needs
+        </div>  
+       
+       <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' 
+        //textAlign: "center",
+        //justifyContent: "center"
+      }}>
         <AboutUs
+        style={{
+          
+        }}
           title={
             <span style={{ 
               color: 'rgb(6, 155, 161)', 
               textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', 
-              fontSize: '30px'
+              fontSize: '30px',
             }}>Luke Garnsey</span>}
             imageSrc={LukeG}
-          //imageSrc={"https://placekitten.com/300/200"}
           description={<p style={{ fontStyle: 'italic', lineHeight: '1.5' }}>Dedicated full stack developer with a profound passion for server-side development. Armed with extensive expertise in crafting robust server architectures and optimizing backend functionality, I thrive on the challenge of creating seamless, efficient solutions that power exceptional user experiences. My commitment to staying at the forefront of technology ensures I bring innovative and scalable server-side solutions to every project I undertake. If you would like to see some of my other projects or wish to contact me, click on my profile link below.</p>}
           externalLink= "https://phenomenal-caramel-76b1b5.netlify.app/"
         />
