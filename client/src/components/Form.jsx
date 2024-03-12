@@ -28,6 +28,7 @@ export default function Form(props) {
    
     // renders the correct form groups
     const [formGroup, setFormGroup] = useState(props.formState)
+    console.log(formGroup);
     // renders the correct form header
     const [formHeader, setFormHeader] = useState('')
 
@@ -102,10 +103,10 @@ export default function Form(props) {
     const handleFormGroup = (e) => {
       e.preventDefault();
         switch(formGroup){
-            case actions.start:
+            case actions.generateDeck.start:
                 setFormGroup(actions.generateDeck.front)
                 break;
-            case actions:
+            case actions.generateDeck.front:
                 setFormGroup(actions.generateDeck.back)
                 break;
             case actions.generateDeck.back:
@@ -202,8 +203,9 @@ export default function Form(props) {
                    )}
                      {/* Create subject and Description */}
                     {(formGroup === actions.generateDeck.start || formGroup === actions.generateDeck.front||formGroup === actions.generateDeck.back || formGroup === actions.generateDeck.generate) && (
-                    
+                      
                       <AddDeckForm onClick={handleFormGroup} state={formGroup} actions={actions} newDeck={props.newDeck}/>
+                      
                     )}
                     {formGroup === actions.loading && (
                     

@@ -6,19 +6,19 @@ import AddDeckGenerate from "./AddDeckGenerate";
 export default function AddDeckForm({state, onClick, actions, newDeck}){
   return (
     <div>
-      {state === actions.start && 
+      {state === actions.generateDeck.start && 
         <AddDeck onClick={onClick} setInfo={newDeck.setInfo} />
       }
       {/*  ENTER FIRST QUESTION*/}
-      {state === actions.front &&
+      {state === actions.generateDeck.front &&
         <AddFrontText onClick={onClick} setFrontText={newDeck.setFrontText} />
       }
       {/* ENTER ANSWER */}
-      {state === actions.back &&
+      {state === actions.generateDeck.back &&
         <AddBackText onClick={onClick} setBackText={newDeck.setBackText}/>
       }
       {/* GENERATE NEW DECK FORM OR CREATE OWN */}
-      {state === actions.generate &&
+      {state === actions.generateDeck.generate &&
         <AddDeckGenerate onClick={onClick} generateCards={newDeck.generateCards} addCard={newDeck.addCard}/>
       }
     </div>
