@@ -8,6 +8,7 @@ import Auth from '../utils/auth';
 import AddDeckForm from "./forms/AddDeckForm";
 import Loading from "./forms/Loading";
 import AddCardForm from "./forms/AddCardForm";
+import Saveing from "./forms/Saveing";
 
 export default function Form(props) {
     // vars for different form states
@@ -24,7 +25,8 @@ export default function Form(props) {
         addCardBack: 'ADDCARD_BACK',
         login: 'LOGIN',
         signup: 'SIGNUP',
-        addDeck: '',
+        saveing: 'SAVEING',
+        finished: 'FINISHED'
     };
 
    
@@ -62,10 +64,16 @@ export default function Form(props) {
             case actions.signup:
                 setFormHeader('Sign Up Form');
                 break;
+            case actions.saveing:
+              setFormHeader(props.saveing.title);
+              break;
+            case actions.finished:
+              setFormHeader('Complete');
+              break;
             default:
                 return                
         }
-      }, [])
+      }, [formGroup])
 
       const handleLoginSubmit = async (e) => {
         e.preventDefault();
@@ -216,13 +224,16 @@ export default function Form(props) {
                    )}
                      {/* Create subject and Description */}
                      {(formGroup === actions.generateDeck.start || formGroup === actions.generateDeck.front||formGroup === actions.generateDeck.back || formGroup === actions.generateDeck.generate) && (
-                      
                       <AddDeckForm onClick={handleFormGroup} state={formGroup} actions={actions} newDeck={props.newDeck}/>
                       
                     )}
-                    {formGroup === actions.loading && (
+                    {formGroup === actions.generateDeck.loading && (
                     
                       <Loading />
+                    )}
+                    {formGroup === actions.saveing && (
+                    
+                      <Saveing text={props.saveing.text} />
                     )}
                     {/* ADD A NEW CARD FORM */}
                     {(formGroup === actions.addCardFront || formGroup === actions.addCardBack) &&(

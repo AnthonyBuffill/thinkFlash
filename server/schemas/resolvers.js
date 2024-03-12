@@ -70,11 +70,11 @@ const {
           let cards = [];
           if(cardData){
             cards = JSON.parse(cardData);
-            console.log(cards);
           }
           const createdCards = await Card.create(cards);
           const cardIds = createdCards.map(card => card._id);
           const deck = await Deck.create({ title, description, cards:cardIds });
+          await new Promise(resolve => setTimeout(resolve, 5000));
           return deck;
         }catch(error){
           return error;
