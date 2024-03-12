@@ -1,10 +1,11 @@
 import { useRef } from "react";
 
-export default function AddDeckGenerate({finished}){
+export default function AddDeckGenerate({onClick, generateCards, addCard}){
   const countRef = useRef(null)
   const submitClick = (e) =>{
     e.preventDefault();
-    finished(countRef.current.value);
+    generateCards(countRef.current.value);
+    onClick();
   };
   
   return (
@@ -22,7 +23,7 @@ export default function AddDeckGenerate({finished}){
       <section className="form-submit">
           <button onClick={submitClick}>generate deck</button>
       </section>
-      <a href="addCard">No thank's I'll create my own</a>
+      <a onClick={addCard}>No thank's I'll create my own</a>
     </section>
   );
 }

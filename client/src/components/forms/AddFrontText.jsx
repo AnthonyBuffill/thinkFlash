@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export default function AddDeckFrontText({onClick, setFrontText}){
+export default function AddFrontText({onClick, setFrontText}){
   const frontTextRef = useRef(null);
   const submitClick = () => {
     setFrontText(frontTextRef.current.value);

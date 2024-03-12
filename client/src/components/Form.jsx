@@ -6,6 +6,7 @@ import '../assets/css/form.css';
 import DashboardPage from '../pages/DashboardPage';
 import Auth from '../utils/auth';
 import AddDeckForm from "./forms/AddDeckForm";
+import Loading from "./forms/Loading";
 
 export default function Form(props) {
     // vars for different form states
@@ -191,10 +192,14 @@ export default function Form(props) {
               </section>
                    )}
                      {/* Create subject and Description */}
-                    {formGroup === actions.start || formGroup === actions.front||formGroup === actions.back || formGroup === actions.generate}
-                    {
+                    {(formGroup === actions.start || formGroup === actions.front||formGroup === actions.back || formGroup === actions.generate) && (
+                    
                       <AddDeckForm onClick={handleFormGroup} state={formGroup} actions={actions} newDeck={props.newDeck}/>
-                    }
+                    )}
+                    {formGroup === actions.loading && (
+                    
+                      <Loading />
+                    )}
                     {/* ADD A NEW CARD FORM */}
                     {formGroup === actions.addCard &&
                     <section className="form-group">
@@ -221,3 +226,4 @@ export default function Form(props) {
         </>
     )
 }
+

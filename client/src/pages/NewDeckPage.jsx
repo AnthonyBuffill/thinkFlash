@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Form from "../components/Form";
 import { QUERY_CREATECARDS } from "../utils/queries";
 import { useLazyQuery } from "@apollo/client";
@@ -14,11 +14,11 @@ export default function NewDeckPage() {
     const [getCards, { loading, error, data }] = useLazyQuery(QUERY_CREATECARDS,{
         fetchPolicy: 'network-only'
     });
-    const finished = (cardCount)=>{
+    const generateCards = (cardCount)=>{
         console.log(deckInfo, frontText, backText, cardCount);
         cardCount = parseInt(cardCount, 10);
         if(isNaN(cardCount))
-        cardCount = 10;
+            cardCount = 10;
 
         getCards({variables: { 
         title: deckInfo.title, 
@@ -32,17 +32,22 @@ export default function NewDeckPage() {
   
     if(error)
         console.log(error);
-    const flashCards = data?JSON.parse(data.createCards)['flashcards'] : null;
+
+    const [flashCards, addCard] = useState(null);
+    if(data){
+        if(!flashCards)
+            addCard(JSON.parse(data.createCards)['flashcards']);
+        else if(JSON.parse(data.createCards)['flashcards'].length !== flashCards.length)
+            addCard(JSON.parse(data.createCards)['flashcards']);
+    }
+    // const flashCards = data?JSON.parse(data.createCards)['flashcards'] : null;
     const value = loading?'LOADING':'START';
     return (
     <>
-    <Form formState={value} newDeck={{setInfo, setFrontText, setBackText, finished}}></Form>
+    {!flashCards && (
+        <Form formState={value} newDeck={{setInfo, setFrontText, setBackText, generateCards}}></Form>
+    )}
         <h3 style={styles.title}>{deckInfo.title}</h3>
-        {loading &&
-        
-        <h3 style={styles.title}>loading...</h3>
-        
-        }
         {error &&
         <h2>Issue with createing Flash Cards.</h2>
         }

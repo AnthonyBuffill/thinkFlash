@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export default function AddDeckBackText({onClick, setBackText}){
+export default function AddBackText({onClick, setBackText}){
   const backTextRef = useRef(null);
   const submitClick = () => {
     setBackText(backTextRef.current.value);
