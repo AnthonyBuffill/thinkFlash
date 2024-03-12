@@ -18,7 +18,6 @@ db.once('open', async () => {
     await cleanDB('User', "users");
     await cleanDB('Deck', "decks");
     await cleanDB("Card", "cards");
-
     const bonesDeckID = await createCards(bones);
     const monkDeckID = await createCards(monk);
     const multiplicationDeckID = await createCards(multiplication);
