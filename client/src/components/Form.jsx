@@ -12,11 +12,13 @@ export default function Form(props) {
     // vars for different form states
 
     const actions = {
+      generateDeck:{
         start: 'START',
         front: 'FRONT',
         back: 'BACK',
         generate: 'GENERATE',
         loading: 'LOADING',
+      },
         addCard: 'ADDCARD',
         login: 'LOGIN',
         signup: 'SIGNUP',
@@ -43,7 +45,7 @@ export default function Form(props) {
             case actions.addCard:
                 setFormHeader('Add New Card')
                 break;
-            case actions.start:
+            case actions.generateDeck.start:
                 setFormHeader('Create New Deck')
                 break;
             case actions.login:
@@ -97,20 +99,21 @@ export default function Form(props) {
       };
 
     // changes form state for --Generate New Deck-- Form on click
-    const handleFormGroup = () => {
+    const handleFormGroup = (e) => {
+      e.preventDefault();
         switch(formGroup){
             case actions.start:
-                setFormGroup(actions.front)
+                setFormGroup(actions.generateDeck.front)
                 break;
-            case actions.front:
-                setFormGroup(actions.back)
+            case actions:
+                setFormGroup(actions.generateDeck.back)
                 break;
-            case actions.back:
-                setFormGroup(actions.generate)
+            case actions.generateDeck.back:
+                setFormGroup(actions.generateDeck.generate)
                 setFormHeader('Generate Deck')
                 break;
-            case actions.generate:
-                setFormGroup(actions.loading)
+            case actions.generateDeck.generate:
+                setFormGroup(actions.generateDeck.loading)
                 break;
             default:
                 console.log('invalid value')
@@ -122,7 +125,7 @@ export default function Form(props) {
     return(
         <>
         <section className="form-container">
-            <form onSubmit={formGroup === actions.login ? handleLoginSubmit : handleSignupSubmit}>
+            <form>
                 <header>
                     <h2>{formHeader}</h2>
                 </header>
@@ -148,15 +151,15 @@ export default function Form(props) {
                 </div>
                 <a href="signup">No Account? Sign up here!</a>
                 <section className="btn-container">
-                  <button type="submit" disabled={loginLoading}>
+                  <button type="submit" onClick={handleLoginSubmit} disabled={loginLoading}>
                     {loginLoading ? 'Logging in...' : 'Submit'}
                   </button>
                 </section>
                 {signupError && <p>Error: {signupError.message}</p>}
               </section>
-                    }
-                    {/* Signup Form */}
-                    {formGroup === actions.signup && (
+            }
+            {/* Signup Form */}
+            {formGroup === actions.signup && (
               <section className="form-group">
                 <div className="form-label-group">
                   <label htmlFor="">Enter Email</label>
@@ -164,6 +167,12 @@ export default function Form(props) {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="form-label-group">
+                  <label htmlFor="">Enter Username</label>
+                  <input
+                  type="text"
                   />
                 </div>
                 <div className="form-label-group">
@@ -184,7 +193,7 @@ export default function Form(props) {
                 </div>
                 <a href="login">Already have an account? Log in here!</a>
                 <section className="btn-container">
-                  <button type="submit" disabled={signupLoading}>
+                  <button type="submit" onClick={handleSignupSubmit} disabled={signupLoading}>
                     {signupLoading ? 'Signing up...' : 'Submit'}
                   </button>
                 </section>
@@ -192,7 +201,7 @@ export default function Form(props) {
               </section>
                    )}
                      {/* Create subject and Description */}
-                    {(formGroup === actions.start || formGroup === actions.front||formGroup === actions.back || formGroup === actions.generate) && (
+                    {(formGroup === actions.generateDeck.start || formGroup === actions.generateDeck.front||formGroup === actions.generateDeck.back || formGroup === actions.generateDeck.generate) && (
                     
                       <AddDeckForm onClick={handleFormGroup} state={formGroup} actions={actions} newDeck={props.newDeck}/>
                     )}
