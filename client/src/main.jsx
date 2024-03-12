@@ -20,12 +20,12 @@ const router = (
   <Routes>
     <Route path="/" element={<App />}>
       <Route index element={<AboutPage />} />
-      <Route path="dashboard" element={<DashboardPage/>} />
+      <Route path="dashboard/" element={<DashboardPage/>} />
       <Route path="deck" element={<DeckPage/>} />
-      <Route path="dashboard/:deckId" element={<DashboardPage/>} />
+      <Route path="deck/:deckId/:userId" element={<DeckPage/>} />
       <Route path="newDeck" element={<NewDeckPage/>} />
       <Route path="addCard" element={<AddCardPage/>} />
-      <Route path="play" element={<PlayPage/>} />
+      <Route path="play/:deckId/:userId" element={<PlayPage/>} />
       <Route path="login" element={<LoginPage />} />
       <Route path="signup" element={<SignupPage/>} />
     </Route>
