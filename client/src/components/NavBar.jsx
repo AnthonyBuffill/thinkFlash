@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
-import { Link } from "react-router-dom"
-import '../assets/css/navbar.css'
+import { Link } from "react-router-dom";
+import '../assets/css/navbar.css';
+import Auth from '../utils/auth';
 
 
 export default function Navbar() {
@@ -8,6 +9,9 @@ export default function Navbar() {
     const menuClose = '../assets/tfcloseMenu.png'
     const [menuBtn, setMenuButton]  = useState(menuOpen)
     const [showMenu, setShowMenu]  = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn()); // Check if the user is initially logged in
+
+
     const maxSmallScreen = 600;
     useEffect(() => {
         const handleResize = () => {
@@ -42,7 +46,12 @@ export default function Navbar() {
         }
 
 
-    }
+    };
+    const handleLogout = () => {
+        Auth.logout();
+        setIsLoggedIn(false);
+      };
+
 
     return (
         <>
@@ -62,12 +71,18 @@ export default function Navbar() {
                     <button>
                         <Link to={'/dashboard'}>DASHBOARD</Link>
                     </button>
-                    <button>
-                        <Link to={'/login'}>LOG IN</Link>
-                    </button>
-                    <button>
-                        <Link to={'/signup'}>SIGN UP</Link>
-                    </button>
+                    {isLoggedIn ? (
+                <button onClick={handleLogout}>LOG OUT</button>
+              ) : (
+                <>
+                  <button>
+                    <Link to={'/login'}>LOG IN</Link>
+                  </button>
+                  <button>
+                    <Link to={'/signup'}>SIGN UP</Link>
+                  </button>
+                </>
+              )}
                 </section>
             }
             </nav>

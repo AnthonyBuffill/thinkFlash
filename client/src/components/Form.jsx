@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER, ADD_USER } from '../utils/mutations';
 import '../assets/css/form.css';
 import DashboardPage from '../pages/DashboardPage';
-import Auth from '../utils/auth';
+import AuthService from '../utils/auth';
 import AddDeckForm from "./forms/AddDeckForm";
 import Loading from "./forms/Loading";
 
@@ -33,9 +33,10 @@ export default function Form(props) {
     const [formHeader, setFormHeader] = useState('')
 
     const [email, setEmail] = useState('');
+    const [username, setUsername]= useState('')
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false); //new state var
+    const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn()); //new state var
     const navigate = useNavigate();
     const [loginMutation, { loading: loginLoading, error: loginError }] = useMutation(LOGIN_USER);
     const [signupMutation, { loading: signupLoading, error: signupError }] = useMutation(ADD_USER);
@@ -68,6 +69,7 @@ export default function Form(props) {
     
           if (data && data.login && data.login.token) {
             const token = data.login.token;
+            AuthService.login(token);
             setIsLoggedIn(true);
             navigate.push('/DashboardPage');
           }
@@ -78,25 +80,31 @@ export default function Form(props) {
     
       const handleSignupSubmit = async (e) => {
         e.preventDefault();
-        
         // Check if passwords match
         if (password !== confirmPassword) {
           console.error('Passwords do not match');
           return;
         }
-    
+        
         try {
-          const { data } = await signupMutation({ variables: { email, password } });
+          const { data } = await signupMutation({ variables: { email, username, password } });
+          console.log(data.addUser);
     
           // If signup is successful, set isLoggedIn to true
-          if (data && data.signup && data.signup.token) {
-            const token = data.signup.token;
+          if (data && data.addUser.token) {
+            const token = data.addUser.token;
+            AuthService.login(token);
             setIsLoggedIn(true);
-            navigate.push('/dashboard');
+            navigate.push('/DashboardPage');
           }
         } catch (error) {
           console.error(error);
         }
+      };
+
+      const handleLogout = () => {
+        AuthService.logout(); // Use the AuthService for logout
+        setIsLoggedIn(false);
       };
 
     // changes form state for --Generate New Deck-- Form on click
@@ -126,7 +134,7 @@ export default function Form(props) {
     return(
         <>
         <section className="form-container">
-            <form>
+            <form onSubmit={(e)=>{e.preventDefault()}}>
                 <header>
                     <h2>{formHeader}</h2>
                 </header>
@@ -156,7 +164,7 @@ export default function Form(props) {
                     {loginLoading ? 'Logging in...' : 'Submit'}
                   </button>
                 </section>
-                {signupError && <p>Error: {signupError.message}</p>}
+                {loginError && <p>Error: {loginError.message}</p>}
               </section>
             }
             {/* Signup Form */}
@@ -174,6 +182,8 @@ export default function Form(props) {
                   <label htmlFor="">Enter Username</label>
                   <input
                   type="text"
+                  value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
                 <div className="form-label-group">
