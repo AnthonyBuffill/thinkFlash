@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import '../assets/css/deck.css'
+import { useQuery } from '@apollo/client';
+import {QUERY_SINGLE_USER} from '../utils/queries'
 
-
-function Card() {
+function Card({frontText, backText}) {
     const [isFlipped, setIsFlipped] = useState(false);
-
     const handleFlipCard = () => {
         setIsFlipped(!isFlipped);
     };
@@ -13,10 +13,10 @@ function Card() {
         <section className="deck-flip-card-container" onClick={handleFlipCard}>
             <div className={`flip-card-inner ${isFlipped ? "flipped" : ""}`} >
                 <figure className="flip-card-front">
-                    <h3>Front Card Question</h3>
+                    <h3>{frontText}</h3>
                 </figure>
                 <figure className="flip-card-back">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet accusantium cupiditate voluptatibus laborum unde dolorem, alias, fugiat sint minima praesentium odit delectus doloremque earum, recusandae commodi excepturi? Voluptatem, commodi obcaecati!</p>
+                    <p>{backText}</p>
                 </figure>
             </div>
         </section>
@@ -25,6 +25,21 @@ function Card() {
 
 export default function DeckPage() {
 
+        // gets card data from server
+        const { loading, data } = useQuery(QUERY_SINGLE_USER, {
+            variables: { userId:  "65efc7c9acf7312c2ae24ce5" },  //userId
+        });
+        const deck =  data?.user?.decks|| [];
+        const findDecK = deck?.find((arr)=> arr._id ==='65efc7c9acf7312c2ae24cb6');
+    
+        const cardsFromData = findDecK?.cards || []
+        console.log(cardsFromData) 
+        
+        let [cards, setCards]= useState([])
+    
+        useEffect(() => {
+            setCards(cardsFromData);
+        }, [cardsFromData]);
     return (
         <>
         <main>
@@ -38,15 +53,11 @@ export default function DeckPage() {
             </section>
 
             <section  className="cards-container">
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
-        <Card/>
+        {cards && cards.map(card => (
+            <Card key={card._id} frontText={card.frontText} backText={card.backText}/>
+
+          ))}
+   
             </section>
             
         </main>
