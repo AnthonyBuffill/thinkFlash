@@ -11,13 +11,14 @@ export default  function DashboardPage() {
         variables: { userId: userId  }, 
       });
   const decks =  data?.user?.decks || [];
-
+      const newDeckURL = `/newDeck`;
     return (
         <>
         <main>
             <section className="dash-nav-container">
                 <button>
-                    <a href="/newDeck">+ create new</a>
+                    
+                    <Link to={newDeckURL}>+ create new</Link>
                 </button>
             </section>
             <section className="decks-container">

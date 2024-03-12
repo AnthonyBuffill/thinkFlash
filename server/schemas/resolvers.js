@@ -20,6 +20,12 @@ const {
           }
         );
       },
+      me: async (parent, args, context) => {
+        if (context.user) {
+          return User.findOne({ _id: context.user._id });
+        }
+        throw AuthenticationError;
+      },
       decks: async (parent, { username }) => {
         const params = username ? { username } : {};
         return Deck.find(params).sort({ createdAt: -1 }).populate('cards');

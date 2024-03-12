@@ -66,7 +66,7 @@ export default function Navbar() {
         } else {
           // Navigate to dashboard
           {Auth.loggedIn() &&
-          navigate('/dashboard/${Auth.getUser()?.data._id}')};
+          navigate(`/dashboard/${Auth.getUser()?.data._id}`)}
         }
       };
     
