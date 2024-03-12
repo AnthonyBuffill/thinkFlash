@@ -7,6 +7,7 @@ const {
  const resolvers = {
     Query: {
       users: async () => {
+        
         return User.find().populate('decks');
       },
       user: async (parent, { userId }) => {
@@ -18,6 +19,12 @@ const {
             },
           }
         );
+      },
+      me: async (parent, args, context) => {
+        if (context.user) {
+          return User.findOne({ _id: context.user._id });
+        }
+        throw AuthenticationError;
       },
       decks: async (parent, { username }) => {
         const params = username ? { username } : {};
@@ -32,9 +39,13 @@ const {
       card: async (parent, {cardId}) =>{
         return Card.findOne({_id, cardId});
       },
-      createCards: async(parent, {title, frontText, backText, cardCount}) => {
+      createCards: async(parent, {title, frontText, backText, cardCount}, context) => {
         try{
+          if(context.user === undefined){
+            return JSON.stringify({message: "You must login to generate cards!"});
+          }
           const value = await createCards(title, frontText, backText, cardCount);
+          console.log("finished calling API");
           return JSON.stringify(value);
         }catch(error){
           console.log("AI error- OPENAI_API_KEY variable probably not set in .env " + error);
@@ -64,9 +75,16 @@ const {
 
         return { token, user };
       },
-      addDeck: async (parent, { title, description, cardData }) => {
+      addDeck: async (parent, { title, description, cardData }, context) => {
         try{
-          console.log(cardData);
+          if(context.user === undefined){
+            return JSON.stringify({message: "You must login to Save a Deck!"});
+          }
+          
+          const user = await User.findOne({ _id: context.user._id });
+          if(!user){
+            return JSON.stringify({message: "You must login to Save a Deck!"});
+          }
           let cards = [];
           if(cardData){
             cards = JSON.parse(cardData);
@@ -74,6 +92,8 @@ const {
           const createdCards = await Card.create(cards);
           const cardIds = createdCards.map(card => card._id);
           const deck = await Deck.create({ title, description, cards:cardIds });
+          user.decks.push(deck._id);
+          await user.save();
           await new Promise(resolve => setTimeout(resolve, 1000));
           return deck;
         }catch(error){
