@@ -4,10 +4,6 @@ import '../assets/css/play.css'
 export default function PlayPage() {
     const [isFlipped, setIsFlipped] = useState(false);
     
-    let [cards, setCards]= useState(dummyCards)
-    let [wrong, setWrong] = useState([])
-    let [index, setIndex]= useState(0)
-    
     const dummyCards =   [
         {
             front: "What is the capital of France?",
@@ -23,6 +19,10 @@ export default function PlayPage() {
         }
        
     ];
+    let [cards, setCards]= useState(dummyCards)
+    let [wrong, setWrong] = useState([])
+    let [index, setIndex]= useState(0)
+    
 
     function restDeck (){
         setCards(wrong)
