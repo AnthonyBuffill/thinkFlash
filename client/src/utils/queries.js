@@ -38,3 +38,21 @@ export const QUERY_SINGLE_USER = gql`
   }
 `;
 
+export const QUERY_ME = gql`
+  query me {
+      user {
+        _id
+        username
+        decks{
+          _id
+          title
+          description
+            cards {
+              frontText
+              backText
+          }
+      }
+    }
+  }
+`;
+
