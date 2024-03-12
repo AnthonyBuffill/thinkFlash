@@ -4,7 +4,7 @@ import { QUERY_CREATECARDS } from "../utils/queries";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { ADD_DECK } from "../utils/mutations";
 export default function NewDeckPage() {
-    
+    let temp = [];
     const [addDeckMutation, addDeckObj] = useMutation(ADD_DECK);
     const saveDeck = () =>{
         if(!flashCards)
@@ -17,6 +17,9 @@ export default function NewDeckPage() {
                 cardData: JSON.stringify(flashCards)
             },
         });
+
+        temp = flashCards;
+        setFlashCards([]);
     }
     const [deckInfo, setInfo] = useState({
         title:'',
@@ -35,7 +38,7 @@ export default function NewDeckPage() {
             backText: backText,
             cardCount: cardCount
             };
-        console.log(variables)
+        
         getCards({variables});
     }
     const addCard = () =>{
@@ -71,7 +74,6 @@ export default function NewDeckPage() {
         }
     }, [loading, data]);
     useEffect(()=>{
-        console.log(addDeckObj);
         if(!addDeckObj.loading){
             if(addDeckObj.data){
                 const id = addDeckObj.data.addDeck._id;
@@ -96,24 +98,31 @@ export default function NewDeckPage() {
     {state === 'addCard' && (
         <Form formState={value} addCard={{setFrontText, setBackText, addCard, setBackToGenerate}}></Form>
     )}
-        <button onClick={saveDeck}>Save Deck</button>
-        <h3 style={styles.title}>{deckInfo.title}</h3>
+        
         {error &&
         <h2>Issue with createing Flash Cards.</h2>
         }
         {flashCards && flashCards.length > 0 && (
+            <>
+                <h3 style={styles.title}>{deckInfo.title}</h3>
             
-            <div style={styles.container}>
-                <div style={styles.cardContainer}>
-                {flashCards.map((jsonData, index) => (
-                <div style={styles.card} key={index}>
-                    <p>{jsonData.frontText}</p>
-                    <hr></hr>
-                    <p>{jsonData.backText}</p>
-                </div>))
-                }
+                <div style={styles.container}>
+                    <div style={styles.cardContainer}>
+                    {flashCards.map((jsonData, index) => (
+                    <div style={styles.card} key={index}>
+                        <p>{jsonData.frontText}</p>
+                        <hr></hr>
+                        <p>{jsonData.backText}</p>
+                    </div>))
+                    }
+                    </div>
                 </div>
-            </div>
+                {(!loading || !addDeckObj.loading) && (
+                    <div className="form-container">
+                    <button onClick={saveDeck}>Save Deck</button>
+                    </div>
+                )}
+            </>
         )}
     </>
     )
@@ -144,5 +153,5 @@ const styles = {
       border: 'solid black 2px',
       width: '150px',
       height: '250px'
-    }
+    },
   }

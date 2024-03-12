@@ -30,7 +30,6 @@ export default function Form(props) {
    
     // renders the correct form groups
     const [formGroup, setFormGroup] = useState(props.formState);
-    console.log(formGroup);
     // renders the correct form header
     const [formHeader, setFormHeader] = useState('');
 
@@ -45,17 +44,23 @@ export default function Form(props) {
     // sets form headers for each form type
     useEffect(() => {
         switch(formGroup){
-            case actions.addCard:
-                setFormHeader('Add New Card')
+            case actions.addCardFront:
+                setFormHeader('Create New Card');
                 break;
             case actions.generateDeck.start:
-                setFormHeader('Create New Deck')
+                setFormHeader('Create New Deck');
                 break;
+            case actions.generateDeck.generate:
+              setFormHeader('Generate Cards');
+              break;
+            case actions.generateDeck.loading:
+              setFormHeader('Loading');
+              break;
             case actions.login:
-                setFormHeader('Login Form')
+                setFormHeader('Login Form');
                 break;
             case actions.signup:
-                setFormHeader('Sign Up Form')
+                setFormHeader('Sign Up Form');
                 break;
             default:
                 return                
@@ -113,14 +118,13 @@ export default function Form(props) {
                 break;
             case actions.generateDeck.back:
                 setFormGroup(actions.generateDeck.generate)
-                setFormHeader('Generate Deck')
                 break;
             case actions.generateDeck.generate:
                 setFormGroup(actions.generateDeck.loading)
+                setFormHeader('Generating Cards...');
                 break;
             case actions.addCardFront:
               setFormGroup(actions.addCardBack)
-              setFormHeader('Manual Add Card')
               break;
             case actions.addCardBack:
               setFormGroup(actions.addCardFront)
@@ -222,23 +226,7 @@ export default function Form(props) {
                     )}
                     {/* ADD A NEW CARD FORM */}
                     {(formGroup === actions.addCardFront || formGroup === actions.addCardBack) &&(
-                      <AddCardForm onClick={handleFormGroup} state={formGroup} actions={actions} addCardProps={props.addCard} />
-                    // <section className="form-group">
-                    //     <div className="form-label-group">
-                    //         <label htmlFor="">Front of Card</label>
-                    //         <input type="text" />
-                    //     </div>
-                    //     <div className="form-label-group">
-                    //         <label htmlFor="">Back of Card</label>
-                    //         <textarea name="" id="" cols="30" rows="7"></textarea>
-                    //     </div>
-                    //     <section className="btn-container">
-                    //         <button>Add Another Card</button>
-                    //         <button className="addCardDoneBtn">
-                    //         <a href="/dashboard">Done</a>  
-                    //         </button>
-                    //     </section>
-                    // </section>                
+                      <AddCardForm onClick={handleFormGroup} state={formGroup} actions={actions} addCardProps={props.addCard} />             
                     )}
                 </div>
               
