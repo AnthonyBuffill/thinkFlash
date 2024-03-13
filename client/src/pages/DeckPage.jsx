@@ -28,7 +28,7 @@ export default function DeckPage({}) {
         <main>
             <section className="dash-nav-container">
                 <button>
-                    <a href="/addCard">+ add card</a>
+                    <a href={`/newDeck`}>+ new deck</a>
                 </button>
                 <button>
                     <a href={`/play/${deckId}/${userId}`}> play</a>
