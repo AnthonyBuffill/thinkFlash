@@ -124,8 +124,8 @@ export default function Navbar() {
             {showModal && (
         <Modal onClose={handleModalClose}>
 
-          <p>You must be logged in to access this feature.</p>
-          <button onClick={handleModalClose}>Sign Up</button>
+          <p className={'modal-p'}>You must be logged in to access this feature.</p>
+          <button className={'modal-signup-btn'}onClick={handleModalClose}>Sign Up</button>
         </Modal>
       )}
         </>
