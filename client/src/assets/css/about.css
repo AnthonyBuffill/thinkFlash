@@ -13,7 +13,13 @@
     -webkit-text-stroke: 1px var(--brownColor);
     font-size: 48px;
     text-align: center;
+    transition: text-shadow .4s ease-in-out, font-size .4s ease-in-out;
     
+}
+.hero-container h1 span:hover{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 48.5px;
+    color: var(--orangeColor) !important;
 }
 .hero-container h1 span:nth-child(odd){
 color: var(--blueColor);
@@ -46,6 +52,11 @@ color: var(--blueColor);
 }
 .brain-power h1{
     text-align: center;
+}
+.brain-power span:hover{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 48.5px;
+    color: var(--orangeColor) !important;
 }
  .main-flip-card-container .deck-flip-card-container{
  width: 350px;
