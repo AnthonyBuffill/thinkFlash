@@ -119,7 +119,7 @@ export default function NewDeckPage() {
         <Form formState={value} addCard={{setFrontText, setBackText, addCard, setBackToGenerate}}></Form>
     )}
     {state === 'saveing' && (
-        <Form formState='SAVEING' saveing={{title:"Saveing", text:`Saveing ${deckInfo.title}`}}></Form>
+        <Form formState='SAVING' saveing={{title:"Saving", text:`Saving ${deckInfo.title}`}}></Form>
     )}
         
         {error &&
