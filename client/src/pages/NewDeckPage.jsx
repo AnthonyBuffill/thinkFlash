@@ -96,7 +96,7 @@ export default function NewDeckPage() {
                 const id = addDeckObj.data.addDeck._id;
                 console.log("DECK ID: " + id);
                 setState('generate');
-                navigate(`/deck/${id}/${Auth.getUser()?.data._id}`);
+                window.location.assign(`/deck/${id}/${Auth.getUser()?.data._id}`);
                 return;
             }
             if(addDeckObj.error){
