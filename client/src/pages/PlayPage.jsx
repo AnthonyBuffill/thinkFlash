@@ -18,32 +18,50 @@ export default function PlayPage() {
     let [cards, setCards]= useState([])
     let [wrongDeck, setWrongDeck] = useState([])
     let [index, setIndex]= useState(0)
-
+    const delayedSetIndex = (value) => {
+        setTimeout(() => {
+            setIndex(value);
+        }, 200);
+    };
+    const shuffleArray = (array) => {
+        const newArray = [];
+        let holdArray = [...array];
+        while(holdArray.length > 0){
+            const ran = Math.floor(Math.random() * holdArray.length);
+            console.log(holdArray[ran]);
+            newArray.push(holdArray[ran]);
+            holdArray.splice(ran, 1);
+            
+        }
+        return newArray;
+    };
+    const [cardsFromData, setCardsFromData] = useState([]);
     useEffect(() => {
         if(data){
             const deck =  data?.user?.decks|| [];
             const findDecK = deck?.find((arr)=> arr._id === deckId);
-            const cardsFromData = findDecK?.cards || []
-            setCards(cardsFromData);
+            setCardsFromData(findDecK?.cards || []);
+            setCards(shuffleArray(cardsFromData));
         }
         
     }, [data, deckId]);
+
     // resets deck and replays wrongDeck answers
     function resetDeck (){
         setCards(wrongDeck)
         setWrongDeck([])
-        setIndex(0)
+        delayedSetIndex(0)
     }
     // handles play again functionality
     function handlePlayAgain(){
         setCards(cardsFromData)
         setWrongDeck([])
-        setIndex(0)
+        delayedSetIndex(0)
     }
     // handle correct answer and renders next card
     const handleCorrectAnswer = () => {
         if(index < cards.length-1){
-           setIndex(++index)
+            delayedSetIndex(++index)
         }else{
           resetDeck()
         }
@@ -54,7 +72,7 @@ export default function PlayPage() {
         wrongDeck.push(card)
         setWrongDeck(wrongDeck)
         if(index < cards.length-1){
-            setIndex(++index)
+            delayedSetIndex(++index)
         }else{            
             resetDeck()
         }
