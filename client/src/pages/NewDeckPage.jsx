@@ -95,9 +95,8 @@ export default function NewDeckPage() {
         if(!addDeckObj.loading){
             if(addDeckObj.data){
                 const id = addDeckObj.data.addDeck._id;
-                console.log("DECK ID: " + id);
-                setState('generate');
-                navigate(`/deck/${id}/${Auth.getUser()?.data._id}`);
+                setState('saveing');
+                window.location.assign(`/deck/${id}/${Auth.getUser()?.data._id}`);
                 return;
             }
             if(addDeckObj.error){
