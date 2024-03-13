@@ -93,10 +93,10 @@ community include:
 
 **Luke Garnsey**
 *https://phenomenal-caramel-76b1b5.netlify.app/*
-**
+# **
 **Karen Douglas**
 *https://karenportfolio.netlify.app/*
-**
+# **
 **Anthony Buffill**
 *https://antbuffillportfolio.netlify.app/*
 
