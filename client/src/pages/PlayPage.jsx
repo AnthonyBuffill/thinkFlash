@@ -18,7 +18,11 @@ export default function PlayPage() {
     let [cards, setCards]= useState([])
     let [wrongDeck, setWrongDeck] = useState([])
     let [index, setIndex]= useState(0)
-
+    const delayedSetIndex = (value) => {
+        setTimeout(() => {
+            setIndex(value);
+        }, 200);
+    };
     useEffect(() => {
         if(data){
             const deck =  data?.user?.decks|| [];
@@ -32,18 +36,18 @@ export default function PlayPage() {
     function resetDeck (){
         setCards(wrongDeck)
         setWrongDeck([])
-        setIndex(0)
+        delayedSetIndex(0)
     }
     // handles play again functionality
     function handlePlayAgain(){
         setCards(cardsFromData)
         setWrongDeck([])
-        setIndex(0)
+        delayedSetIndex(0)
     }
     // handle correct answer and renders next card
     const handleCorrectAnswer = () => {
         if(index < cards.length-1){
-           setIndex(++index)
+            delayedSetIndex(++index)
         }else{
           resetDeck()
         }
@@ -54,7 +58,7 @@ export default function PlayPage() {
         wrongDeck.push(card)
         setWrongDeck(wrongDeck)
         if(index < cards.length-1){
-            setIndex(++index)
+            delayedSetIndex(++index)
         }else{            
             resetDeck()
         }
