@@ -11,17 +11,17 @@ export default function DeckPage({}) {
         const { loading, data } = useQuery(QUERY_SINGLE_USER, {
             variables: { userId:  userId },  
         });
-        const deck =  data?.user?.decks|| [];
-        const findDecK = deck?.find((arr)=> arr._id === deckId);
-        const cardsFromData = findDecK?.cards || []
         
         let [cards, setCards]= useState([])
         
-    useEffect(() => {
-        if (JSON.stringify(cardsFromData) !== JSON.stringify(cards)) {
-            setCards(cardsFromData);
-        }
-    }, [cardsFromData, cards]);
+        useEffect(() => {
+            if (!loading && data) {
+                const deck = data?.user?.decks || [];
+                const findDeck = deck.find((arr) => arr._id === deckId);
+                const cardsFromData = findDeck?.cards || [];
+                setCards(cardsFromData);
+            }
+        }, [loading, data, deckId]);
 
     return (
         <>
