@@ -12,7 +12,6 @@ Are you studying from an important exam?  Perhaps you have an interview and want
  ## Table of Contents 
 
 - [Navigation](#navigation)
-- [Usage](#usage)
 - [License](#license)
 - [Questions? Contact Us](#questions-contact-us)
 - [Screen Shots](#screen-shots)
@@ -32,7 +31,7 @@ Are you studying from an important exam?  Perhaps you have an interview and want
  - Once a user wishes to use their deck either directly from the create deck feature or by choosing from a saved deck on their dashboard a pop out window will show the deck as well as some options for interacting.
  - There, a user can click on a card to flip it to the opposing side presenting the answer to the question, click a "next" arrow to move on to another card, or choose to abort the deck and head back to the dashboard.  
 
- ## Usage
+ ## Screen Shots
 
 
 
@@ -101,4 +100,4 @@ community include:
 *https://antbuffillportfolio.netlify.app/*
 
 ## Deployment
-**Heroku:**
+**LIVE URL:  https://thinkflash-0iex.onrender.com/**

@@ -110,7 +110,7 @@ export default function Form(props) {
             const token = data.addUser.token;
             AuthService.login(token);
             setIsLoggedIn(true);
-            navigate(`/dashboard/${data.login.user._id}`);
+            window.location.assign(`/dashboard/${data.addUser._id}`);
           }
         } catch (error) {
           console.error(error);

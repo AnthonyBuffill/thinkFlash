@@ -13,7 +13,7 @@ export default function AddDeck({setInfo, onClick}){
   return (
     <section className="form-group">
         <div className="form-label-group">
-            <label htmlFor="">What is the subect?</label>
+            <label htmlFor="">What is the subject?</label>
             <input ref={titleRef} type="text" />
         </div>
         <div className="form-label-group">
