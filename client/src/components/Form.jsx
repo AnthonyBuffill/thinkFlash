@@ -25,7 +25,7 @@ export default function Form(props) {
         addCardBack: 'ADDCARD_BACK',
         login: 'LOGIN',
         signup: 'SIGNUP',
-        saveing: 'SAVEING',
+        saving: 'SAVING',
         finished: 'FINISHED'
     };
 
@@ -65,8 +65,8 @@ export default function Form(props) {
             case actions.signup:
                 setFormHeader('Sign Up Form');
                 break;
-            case actions.saveing:
-              setFormHeader(props.saveing.title);
+            case actions.saving:
+              setFormHeader(props.saving.title);
               break;
             case actions.finished:
               setFormHeader('Complete');
@@ -241,9 +241,9 @@ export default function Form(props) {
                     
                       <Loading />
                     )}
-                    {formGroup === actions.saveing && (
+                    {formGroup === actions.saving && (
                     
-                      <Saveing text={props.saveing.text} />
+                      <Saveing text={props.saving.text} />
                     )}
                     {/* ADD A NEW CARD FORM */}
                     {(formGroup === actions.addCardFront || formGroup === actions.addCardBack) &&(

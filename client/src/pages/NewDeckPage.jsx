@@ -25,7 +25,7 @@ export default function NewDeckPage() {
 
         temp = flashCards;
         setFlashCards([]);
-        setState('saveing');
+        setState('saving');
     }
     const [deckInfo, setInfo] = useState({
         title:'',
@@ -95,7 +95,7 @@ export default function NewDeckPage() {
         if(!addDeckObj.loading){
             if(addDeckObj.data){
                 const id = addDeckObj.data.addDeck._id;
-                setState('saveing');
+                setState('saving');
                 window.location.assign(`/deck/${id}/${Auth.getUser()?.data._id}`);
                 return;
             }
@@ -118,8 +118,8 @@ export default function NewDeckPage() {
     {state === 'addCard' && (
         <Form formState={value} addCard={{setFrontText, setBackText, addCard, setBackToGenerate}}></Form>
     )}
-    {state === 'saveing' && (
-        <Form formState='SAVING' saveing={{title:"Saving", text:`Saving ${deckInfo.title}`}}></Form>
+    {state === 'saving' && (
+        <Form formState='SAVING' saving={{title:"Saving", text:`Saving ${deckInfo.title}`}}></Form>
     )}
         
         {error &&
