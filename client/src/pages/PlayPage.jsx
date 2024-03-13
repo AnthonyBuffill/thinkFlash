@@ -12,9 +12,7 @@ export default function PlayPage() {
         const { loading, data } = useQuery(QUERY_SINGLE_USER, {
             variables: { userId:  userId },  
         });
-        const deck =  data?.user?.decks|| [];
-        const findDecK = deck?.find((arr)=> arr._id === deckId);
-        const cardsFromData = findDecK?.cards || []
+        
     
 
     let [cards, setCards]= useState([])
@@ -22,8 +20,14 @@ export default function PlayPage() {
     let [index, setIndex]= useState(0)
 
     useEffect(() => {
-        setCards(cardsFromData);
-    }, [cardsFromData]);
+        if(data){
+            const deck =  data?.user?.decks|| [];
+            const findDecK = deck?.find((arr)=> arr._id === deckId);
+            const cardsFromData = findDecK?.cards || []
+            setCards(cardsFromData);
+        }
+        
+    }, [data, deckId]);
     // resets deck and replays wrongDeck answers
     function resetDeck (){
         setCards(wrongDeck)

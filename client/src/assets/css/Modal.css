@@ -15,7 +15,7 @@
   background: var(--orangeColor);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .modal-close-btn {
@@ -23,8 +23,26 @@
   top: 10px;
   right: 10px;
   background-color: var(--inputColor);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border: none;
-  font-size: 20px;
+  font-size: 40px;
   cursor: pointer;
   outline: none;
+}
+.modal-signup-btn {
+  transition: box-shadow 0.3s ease;
+  max-width: 70%;
+  max-height: 60px;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: var(--inputColor);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+  outline: none;
+}
+.modal-p {
+  font-size: 40px;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }

@@ -18,8 +18,10 @@ export default function DeckPage({}) {
         let [cards, setCards]= useState([])
         
     useEffect(() => {
-        setCards(cardsFromData);
-    }, [cardsFromData]);
+        if (JSON.stringify(cardsFromData) !== JSON.stringify(cards)) {
+            setCards(cardsFromData);
+        }
+    }, [cardsFromData, cards]);
 
     return (
         <>
