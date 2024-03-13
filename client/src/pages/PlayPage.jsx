@@ -28,7 +28,6 @@ export default function PlayPage() {
         let holdArray = [...array];
         while(holdArray.length > 0){
             const ran = Math.floor(Math.random() * holdArray.length);
-            console.log(holdArray[ran]);
             newArray.push(holdArray[ran]);
             holdArray.splice(ran, 1);
             
@@ -40,8 +39,9 @@ export default function PlayPage() {
         if(data){
             const deck =  data?.user?.decks|| [];
             const findDecK = deck?.find((arr)=> arr._id === deckId);
-            setCardsFromData(findDecK?.cards || []);
-            setCards(shuffleArray(cardsFromData));
+            const dataCards = findDecK?.cards || [];
+            setCardsFromData(dataCards);
+            setCards(shuffleArray(dataCards));
         }
         
     }, [data, deckId]);
