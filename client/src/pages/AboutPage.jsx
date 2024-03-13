@@ -3,23 +3,40 @@ import AboutUs from '../components/AboutUs';
 import AntB from '../assets/images/AntB.png'
 import KarenD from '../assets/images/KarenD.png';
 import LukeG from '../assets/images/LukeG.png';
-
+import Card from '../components/Card';
+import '../assets/css/about.css'
 export default function AboutPage() {
+  const flipCardEx = {
+    frontText: 'How does it Work?',
+    backText: 'Experience a new way to learn with our flash cards generated with the power of AI, personalized to your desired content, the power to create the optimum enviroment to meet your needs in whatever landscape of your choosing, you can seemglessly create a deck of flash cards for all your studying preparation and entertainment needs'
+  }
   return (
     <>
-      <div style={{ fontSize: '375%', padding: '60px', color: 'rgb(6, 155, 161)', 
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'}}> Where <span style= {{fontSize: '70px', color: '#FFE3A1',
-              textShadow: '2px 2px 4px rgba(6, 155, 161, 1.0)', }}>Intelligence </span><br/>meets <span style= {{fontSize: '70px', color: '#FFE3A1',
-              textShadow: '2px 2px 4px rgba(6, 155, 161, 1.0)', }}>Intuition</span> in <br/>the world <br/>of <span style= {{fontSize: '70px', color: '#FFE3A1',
-              textShadow: '2px 2px 4px rgba(6, 155, 161, 1.0)', }}>Digital learning</span>.
-      </div>
-       <div style={{ display: 'flex', justifyContent: 'space-between', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-        padding: '130px',
-        fontSize: '150%', 
-        color: 'rgb(6, 155, 161)',textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)'}}> Experience a new way to learn with our flash cards generated with the power of AI, personalized to your desired content, the power to create the optimum enviroment to meet your needs in whatever landscape of your choosing, you can seemglessly create a deck of flash cards for all your studying preparation and entertainment needs
-        </div>  
+      <section className='hero-container'>
+        <header>
+          <h1>
+          Where <span>Intelligence</span> meets  <span>intuition</span> in the world of <span>Digital learning</span>.
+          </h1>
+        </header>
+        <figure>
+          <img src="/assets/ThinkFlashTransparent.png" alt="transparent flash cards image" />
+        </figure>
+      </section>
+      <section className='brain-power'>
+        <header >
+          <h1>
+            Boost Your <span>Brain Power</span>
+          </h1>
+        </header>
+        <figure className='main-flip-card-container'>
+          <Card frontText={flipCardEx.frontText} backText={flipCardEx.backText}/>
+        </figure>
+      </section>
        
-       <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' 
+      
+      
+      
+       <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', maxWidth:'1100px', margin: '0 auto'
         //textAlign: "center",
         //justifyContent: "center"
       }}>
