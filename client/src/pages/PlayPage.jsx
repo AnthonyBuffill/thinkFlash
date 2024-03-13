@@ -23,15 +23,29 @@ export default function PlayPage() {
             setIndex(value);
         }, 200);
     };
+    const shuffleArray = (array) => {
+        const newArray = [];
+        let holdArray = [...array];
+        while(holdArray.length > 0){
+            const ran = Math.floor(Math.random() * holdArray.length);
+            console.log(holdArray[ran]);
+            newArray.push(holdArray[ran]);
+            holdArray.splice(ran, 1);
+            
+        }
+        return newArray;
+    };
+    const [cardsFromData, setCardsFromData] = useState([]);
     useEffect(() => {
         if(data){
             const deck =  data?.user?.decks|| [];
             const findDecK = deck?.find((arr)=> arr._id === deckId);
-            const cardsFromData = findDecK?.cards || []
-            setCards(cardsFromData);
+            setCardsFromData(findDecK?.cards || []);
+            setCards(shuffleArray(cardsFromData));
         }
         
     }, [data, deckId]);
+
     // resets deck and replays wrongDeck answers
     function resetDeck (){
         setCards(wrongDeck)
