@@ -4,6 +4,7 @@ import { QUERY_CREATECARDS } from "../utils/queries";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { ADD_DECK } from "../utils/mutations";
 import { useNavigate } from 'react-router-dom';
+import Card from '../components/Card'
 import Auth from '../utils/auth';
 
 export default function NewDeckPage() {
@@ -132,11 +133,9 @@ export default function NewDeckPage() {
                 <div style={styles.container}>
                     <div style={styles.cardContainer}>
                     {flashCards.map((jsonData, index) => (
-                    <div style={styles.card} key={index}>
-                        <p>{jsonData.frontText}</p>
-                        <hr></hr>
-                        <p>{jsonData.backText}</p>
-                    </div>))
+                        <Card key={index} frontText={jsonData.frontText} backText={jsonData.backText}/>
+                    
+                    ))
                     }
                     </div>
                 </div>

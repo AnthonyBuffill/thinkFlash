@@ -1,7 +1,7 @@
 .deck-flip-card-container{
     width: 300px;
     height: 150px;
-    margin: 20px;
+    margin: 50px 0;
 }
 .cards-container{
     display: flex;
