@@ -85,13 +85,11 @@ export default function Navbar() {
                         <button className="menu-btn" onClick={handleMenuToggle}>
                             <img src={menuBtn} alt="" />
                         </button>
-                        <h1><span style={{
-                            fontSize: '60px', color: 'rgb(6, 155, 161)',
-                            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-                        }}>THINK</span><span style={{
-                            fontSize: '85px', color: '#FFE3A1',
-                            textShadow: '2px 2px 4px rgba(6, 155, 161, 1.0)',
-                        }}>FLASH </span></h1>
+                        <section className="logo-img">
+                        <img src={`/assets/ThinkFlashIcon.png`} alt="think flash icon" />
+                            <img src={`/assets/ThinkFlashText.png`}alt="Think Flash Text" />
+
+                        </section>
                     </section>
                     {showMenu &&
                         <section className="nav-links-container">
