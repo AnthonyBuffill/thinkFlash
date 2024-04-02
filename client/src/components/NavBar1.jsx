@@ -6,8 +6,8 @@ import Modal from "./Modal";
 
 
 export default function Navbar() {
-    const menuOpen = "MENUOPEN"
-    const menuClose = 'MENUCLOSE'
+    const menuOpen = '../assets/tfmenu.png'
+    const menuClose = '../assets/tfcloseMenu.png'
     const [menuBtn, setMenuButton] = useState(menuOpen)
     const [showMenu, setShowMenu] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn()); // Check if the user is initially logged in
@@ -15,7 +15,7 @@ export default function Navbar() {
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
 
-    const maxSmallScreen = 750;
+    const maxSmallScreen = 600;
     
     useEffect(() => {
         const handleResize = () => {
@@ -42,10 +42,8 @@ export default function Navbar() {
     const handleMenuToggle = () => {
 
         if (menuBtn === menuOpen) {
-            setMenuButton(menuClose)
             setShowMenu(true)
         } else {
-            setMenuButton(menuOpen)
             setShowMenu(false)
         }
 
@@ -83,19 +81,12 @@ export default function Navbar() {
                 <nav className="nav-container">
                     <section className="logo-container">
                         <button className="menu-btn" onClick={handleMenuToggle}>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                            <img src={menuBtn} alt="" />
                         </button>
+                        <section className="logo-img">
+                        <img src={`/assets/ThinkFlashIcon.png`} alt="think flash icon" />
+                            <img src={`/assets/ThinkFlashText.png`}alt="Think Flash Text" />
 
-
-                           <section className="logo-img">
-                           <img src={`/assets/ThinkFlashIcon.png`} alt="think flash icon" />
-                       {window.innerWidth > 750 ?
-                            <img src={`/assets/ThinkFlashText.png`}alt="Think Flash Text" />:
-                            ""
-
-                        } 
                         </section>
                     </section>
                     {showMenu &&

@@ -16,7 +16,7 @@
 
 .logo-container{
     display: flex;
-    gap: 30px;
+    gap: 30%;
     padding: 20px 8px;
     align-items: center;
     background-color: var(--beigeColor);
@@ -28,9 +28,36 @@
     border: none;
     background: none;
 }
-.menu-btn img{
+.menu-btn{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     max-width: 100px;
+    width: 100px;
     height: 80px;
+    border: none;
+    box-shadow: none !important;
+}
+.menu-btn span{
+    background-color: var(--brownColor);
+    height: 10px;
+    width: 100px;
+    border-radius: 10px;
+    transition: rotate .5s ease, diplay .5s ease;
+}
+.menu-btn:hover span:nth-child(2){
+    display: none;
+
+}
+.menu-btn:hover span:nth-child(1){
+    height: 80px;
+    margin-top: 50%;
+    rotate: 45deg;
+}
+.menu-btn:hover span:nth-child(3){
+    height: 80px;
+    margin-bottom: 30%;
+    rotate: 135deg;
 }
 .nav-links-container{
     display: flex;
