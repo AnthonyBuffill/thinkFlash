@@ -40,21 +40,21 @@
 }
 .menu-btn span{
     background-color: var(--brownColor);
-    height: 10px;
+    height: 5px;
     width: 100px;
     border-radius: 10px;
     transition: rotate .5s ease, diplay .5s ease;
 }
-.menu-btn:hover span:nth-child(2){
+.menu-span2{
     display: none;
 
 }
-.menu-btn:hover span:nth-child(1){
+.menu-span1{
     height: 80px;
     margin-top: 50%;
     rotate: 45deg;
 }
-.menu-btn:hover span:nth-child(3){
+.menu-span3{
     height: 80px;
     margin-bottom: 30%;
     rotate: 135deg;
@@ -108,6 +108,9 @@
         border: none;
         min-height: 90px;
         padding: 20px 8px 0px 8px;
+    }
+    .logo-text{
+        margin-left: 30px;
     }
     .nav-links-container{
         flex-direction: row;
