@@ -6,8 +6,8 @@ import Modal from "./Modal";
 
 
 export default function Navbar() {
-    const menuOpen = "MENUOPEN"
-    const menuClose = 'MENUCLOSE'
+    const menuOpen = '../assets/tfmenu.png'
+    const menuClose = '../assets/tfcloseMenu.png'
     const [menuBtn, setMenuButton] = useState(menuOpen)
     const [showMenu, setShowMenu] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(Auth.loggedIn()); // Check if the user is initially logged in
@@ -15,25 +15,8 @@ export default function Navbar() {
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
 
-    const maxSmallScreen = 750;
-    // styles for menu toggle effect
-   const menuBtnDynamicStyles = {
-        secondMenuSpan:{
-            display: menuOpen? "" : none
-        },
-        firstMenuSpan: {
-            height: menuOpen? "": "80px",
-            marginTop: menuOpen? "": "50%",
-            rotate: menuOpen? "": "45deg"
-        },
-        thirdMenuSpan: {
-            height: menuOpen? "": "80px",
-            marginBottom: menuOpen? "": "30%",
-            rotate: menuOpen? "": "135deg"
-        }
-    }
-    //merges dynamic styles to stylesheet
-
+    const maxSmallScreen = 600;
+    
     useEffect(() => {
         const handleResize = () => {
 
@@ -59,10 +42,8 @@ export default function Navbar() {
     const handleMenuToggle = () => {
 
         if (menuBtn === menuOpen) {
-            setMenuButton(menuClose)
             setShowMenu(true)
         } else {
-            setMenuButton(menuOpen)
             setShowMenu(false)
         }
 
@@ -100,21 +81,12 @@ export default function Navbar() {
                 <nav className="nav-container">
                     <section className="logo-container">
                         <button className="menu-btn" onClick={handleMenuToggle}>
-                            <span className={showMenu?"menu-span1": ""}></span>
-                            <span className={ showMenu?"menu-span2": ""}></span>
-                            <span className={ showMenu?"menu-span3": ""}></span>
-                      
-                     
+                            <img src={menuBtn} alt="" />
                         </button>
+                        <section className="logo-img">
+                        <img src={`/assets/ThinkFlashIcon.png`} alt="think flash icon" />
+                            <img src={`/assets/ThinkFlashText.png`}alt="Think Flash Text" />
 
-
-                           <section className="logo-img">
-                           <img src={`/assets/ThinkFlashIcon.png`} alt="think flash icon" />
-                       {window.innerWidth > 750 ?
-                            <img className="logo-text" src={`/assets/ThinkFlashText.png`}alt="Think Flash Text" />:
-                            ""
-
-                        } 
                         </section>
                     </section>
                     {showMenu &&

@@ -16,7 +16,7 @@
 
 .logo-container{
     display: flex;
-    gap: 30px;
+    gap: 30%;
     padding: 20px 8px;
     align-items: center;
     background-color: var(--beigeColor);
@@ -28,9 +28,36 @@
     border: none;
     background: none;
 }
-.menu-btn img{
+.menu-btn{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     max-width: 100px;
+    width: 100px;
     height: 80px;
+    border: none;
+    box-shadow: none !important;
+}
+.menu-btn span{
+    background-color: var(--brownColor);
+    height: 5px;
+    width: 100px;
+    border-radius: 10px;
+    transition: rotate .5s ease, diplay .5s ease;
+}
+.menu-span2{
+    display: none;
+
+}
+.menu-span1{
+    height: 80px;
+    margin-top: 50%;
+    rotate: 45deg;
+}
+.menu-span3{
+    height: 80px;
+    margin-bottom: 30%;
+    rotate: 135deg;
 }
 .nav-links-container{
     display: flex;
@@ -81,6 +108,9 @@
         border: none;
         min-height: 90px;
         padding: 20px 8px 0px 8px;
+    }
+    .logo-text{
+        margin-left: 30px;
     }
     .nav-links-container{
         flex-direction: row;
