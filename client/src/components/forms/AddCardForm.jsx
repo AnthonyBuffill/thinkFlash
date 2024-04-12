@@ -1,6 +1,13 @@
 import AddBackText from "./AddBackText";
 import AddFrontText from "./AddFrontText";
+import PropTypes from 'prop-types';
 
+AddCardForm.propTypes = {
+  state: PropTypes.string.isRequired,
+  onClick:PropTypes.func.isRequired,
+  actions:PropTypes.object.isRequired,
+  addCardProps: PropTypes.object.isRequired
+}
 export default function AddCardForm({state, onClick, actions, addCardProps}){
   const submitClick = () => {
     addCardProps.setBackToGenerate();
@@ -14,7 +21,7 @@ export default function AddCardForm({state, onClick, actions, addCardProps}){
       {state === actions.addCardBack &&
         <AddBackText onClick={() => { addCardProps.addCard(); onClick();}} setBackText={addCardProps.setBackText} />
       }
-      <button style={styles.genButton} onClick={submitClick}>Auto Generate >_></button>
+      <button style={styles.genButton} onClick={submitClick}>Auto Generate</button>
     </div>
   );
 }

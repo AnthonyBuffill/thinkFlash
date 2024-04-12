@@ -1,5 +1,27 @@
 .about-us-container {
-  display: flex ;
-  justify-content: space-around; 
-  flex-direction: row;
+  margin: 15px;
+  /* display: flex ; */
+  /* justify-content: space-around; 
+  flex-direction: row; */
+}
+.about-us-subContainer {
+  display: flex;
+}
+.about-us-imgContainer {
+  margin: 10px;
+}
+.about-us-imgContainer img {
+  object-fit: contain;
+  width: 200px;
+}
+.about-us-description {
+  margin-top: 20px;
+  margin-right: 5%;
+  margin-bottom: 15px;
+  /* display: inline; */
+  width: 100%;
+}
+.about-us-description a {
+  margin-top: 25px;
+  float: left;
 }

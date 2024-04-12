@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Link, useParams } from 'react-router-dom';
 import DeckStack from "../components/DeckStack";
 import { useQuery } from '@apollo/client';

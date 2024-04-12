@@ -1,5 +1,11 @@
 import { useRef } from "react";
 
+import PropTypes from 'prop-types';
+
+AddDeck.propTypes = {
+  setInfo: PropTypes.func.isRequired,
+  onClick:PropTypes.func.isRequired,
+}
 export default function AddDeck({setInfo, onClick}){
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
