@@ -1,5 +1,11 @@
 import { useRef, useState } from "react";
+import PropTypes from 'prop-types';
 
+AddDeckGenerate.propTypes = {
+  onClick:PropTypes.func.isRequired,
+  generateCards:PropTypes.func.isRequired,
+  addCard: PropTypes.func.isRequired
+}
 export default function AddDeckGenerate({onClick, generateCards, addCard}){
   const countRef = useRef(null)
   const submitClick = (e) =>{
@@ -20,10 +26,31 @@ export default function AddDeckGenerate({onClick, generateCards, addCard}){
               <option value="25">25</option>
           </select>
       </div>
-      <section className="form-submit">
-          <button onClick={submitClick}>generate {countValue} cards</button>
+      <section style={styles.section} className="form-submit">
+          <button style={styles.margin} onClick={submitClick}>generate {countValue} cards</button>
+
+          <button style={styles.button}>
+            <a onClick={addCard}>I will create my own</a>
+          </button>
       </section>
-      <a onClick={addCard}>No thank's I'll create my own</a>
+      
     </section>
   );
+}
+
+const styles = {
+  section:{
+    display:'flex',
+    justifyContent:'space-around',
+    margin:'10px'
+  },
+  margin:{
+    margin:'15px',
+    flexGrow:'5'
+  },
+  button:{
+    fontSize:'14px',
+    margin:'15px',
+    flexGrow:'0'
+  }
 }

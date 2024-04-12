@@ -15,6 +15,7 @@ import AddCardPage from './pages/AddCardPage.jsx';
 // styles
 import './assets/css/resets.css'
 import './assets/css/index.css'
+import TeamPage from './pages/TeamPage.jsx';
 
 
 
@@ -23,6 +24,7 @@ const router = (
     <Route path="/" element={<App />}>
       <Route index element={<AboutPage />} />
 
+      <Route path="team" element={<TeamPage/>} />
       <Route path="modal" element={<Modal/>} />
       <Route path="dashboard/" element={<DashboardPage/>} />
       <Route path="dashboard/:userId" element={<DashboardPage/>} />

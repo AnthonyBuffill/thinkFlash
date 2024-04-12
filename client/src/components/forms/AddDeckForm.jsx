@@ -2,7 +2,14 @@ import AddDeck from "./AddDeck";
 import AddFrontText from "./AddFrontText";
 import AddBackText from "./AddBackText";
 import AddDeckGenerate from "./AddDeckGenerate";
+import PropTypes from 'prop-types';
 
+AddDeckForm.propTypes = {
+  state: PropTypes.string.isRequired,
+  onClick:PropTypes.func.isRequired,
+  actions:PropTypes.object,
+  newDeck:PropTypes.object
+}
 export default function AddDeckForm({state, onClick, actions, newDeck}){
   return (
     <div>

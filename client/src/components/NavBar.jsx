@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import '../assets/css/navbar.css';
 import Auth from '../utils/auth';
 import Modal from "./Modal";
@@ -17,21 +17,21 @@ export default function Navbar() {
 
     const maxSmallScreen = 750;
     // styles for menu toggle effect
-   const menuBtnDynamicStyles = {
-        secondMenuSpan:{
-            display: menuOpen? "" : none
-        },
-        firstMenuSpan: {
-            height: menuOpen? "": "80px",
-            marginTop: menuOpen? "": "50%",
-            rotate: menuOpen? "": "45deg"
-        },
-        thirdMenuSpan: {
-            height: menuOpen? "": "80px",
-            marginBottom: menuOpen? "": "30%",
-            rotate: menuOpen? "": "135deg"
-        }
-    }
+//    const menuBtnDynamicStyles = {
+//         secondMenuSpan:{
+//             display: menuOpen? "" : none
+//         },
+//         firstMenuSpan: {
+//             height: menuOpen? "": "80px",
+//             marginTop: menuOpen? "": "50%",
+//             rotate: menuOpen? "": "45deg"
+//         },
+//         thirdMenuSpan: {
+//             height: menuOpen? "": "80px",
+//             marginBottom: menuOpen? "": "30%",
+//             rotate: menuOpen? "": "135deg"
+//         }
+//     }
     //merges dynamic styles to stylesheet
 
     useEffect(() => {
@@ -121,6 +121,10 @@ export default function Navbar() {
                         <section className="nav-links-container">
                             <button>
                                 <Link to={'/'}>ABOUT</Link>
+                            </button>
+
+                            <button>
+                                <Link to={'/Team'}>TEAM</Link>
                             </button>
 
                         

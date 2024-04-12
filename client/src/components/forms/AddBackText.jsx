@@ -1,5 +1,10 @@
 import { useRef } from "react";
+import PropTypes from 'prop-types';
 
+AddBackText.propTypes = {
+  setBackText: PropTypes.func.isRequired,
+  onClick:PropTypes.func.isRequired,
+}
 export default function AddBackText({onClick, setBackText}){
   const backTextRef = useRef(null);
   const submitClick = () => {

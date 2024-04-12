@@ -122,10 +122,10 @@
 
     }
     .nav-links-container button, .nav-container a{
-        font-size: 12px;
+        font-size: 16px;
     }
   }
-  @media screen and (min-width: 930px) {
+  @media screen and (min-width: 1059px) {
     .nav-container{
         flex-direction: row;
         justify-content: space-between;

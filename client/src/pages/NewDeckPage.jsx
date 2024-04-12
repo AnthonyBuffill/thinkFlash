@@ -8,13 +8,12 @@ import Card from '../components/Card'
 import Auth from '../utils/auth';
 
 export default function NewDeckPage() {
-    let temp = [];
     const navigate = useNavigate();
     const [addDeckMutation, addDeckObj] = useMutation(ADD_DECK);
     const saveDeck = () =>{
         if(!flashCards)
             return;
-
+        
         addDeckMutation({
             variables : {
                 title:deckInfo.title,
@@ -23,7 +22,6 @@ export default function NewDeckPage() {
             },
         });
 
-        temp = flashCards;
         setFlashCards([]);
         setState('saving');
     }
@@ -94,6 +92,11 @@ export default function NewDeckPage() {
     useEffect(()=>{
         if(!addDeckObj.loading){
             if(addDeckObj.data){
+                
+                if(addDeckObj.data.addDeck._id === null){
+                    navigate(`/login`);
+                    return;
+                }
                 const id = addDeckObj.data.addDeck._id;
                 setState('saving');
                 window.location.assign(`/deck/${id}/${Auth.getUser()?.data._id}`);

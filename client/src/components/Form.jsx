@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER, ADD_USER } from '../utils/mutations';
 import '../assets/css/form.css';
-import DashboardPage from '../pages/DashboardPage';
 import AuthService from '../utils/auth';
 import AddDeckForm from "./forms/AddDeckForm";
 import Loading from "./forms/Loading";
 import AddCardForm from "./forms/AddCardForm";
 import Saveing from "./forms/Saveing";
+import PropTypes from 'prop-types';
 
+Form.propTypes = {
+  props: PropTypes.object,
+  formState:PropTypes.string,
+  saving:PropTypes.object,
+  newDeck:PropTypes.object,
+  addCard:PropTypes.object
+}
 export default function Form(props) {
     // vars for different form states
 
@@ -40,7 +46,7 @@ export default function Form(props) {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn()); //new state var
-    const navigate = useNavigate();
+
     const [loginMutation, { loading: loginLoading, error: loginError }] = useMutation(LOGIN_USER);
     const [signupMutation, { loading: signupLoading, error: signupError }] = useMutation(ADD_USER);
 
