@@ -41,9 +41,9 @@ const {
       },
       createCards: async(parent, {title, frontText, backText, cardCount}, context) => {
         try{
-          if(context.user === undefined){
-            return JSON.stringify({message: "You must login to generate cards!"});
-          }
+          // if(context.user === undefined){
+          //   return JSON.stringify({message: "You must login to generate cards!"});
+          // }
           const value = await createCards(title, frontText, backText, cardCount);
           console.log("finished calling API");
           return JSON.stringify(value);
@@ -78,11 +78,13 @@ const {
       addDeck: async (parent, { title, description, cardData }, context) => {
         try{
           if(context.user === undefined){
+            // console.log("not logged in");
             return JSON.stringify({message: "You must login to Save a Deck!"});
           }
           
           const user = await User.findOne({ _id: context.user._id });
           if(!user){
+            // console.log("no user");
             return JSON.stringify({message: "You must login to Save a Deck!"});
           }
           let cards = [];

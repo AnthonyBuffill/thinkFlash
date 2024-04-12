@@ -58,10 +58,21 @@ color: var(--blueColor);
     font-size: 48.5px;
     color: var(--orangeColor) !important;
 }
+.brain-power div{
+    text-align: center;
+}
+.brain-power button{
+    width: 125px;
+    height: 50px;
+    border-radius: 15px;
+    padding: 15px;
+    font-size: large;
+    cursor: pointer;
+}
  .main-flip-card-container .deck-flip-card-container{
  width: 350px;
  min-height: 200px;
-
+ cursor: pointer;
 }
 .main-flip-card-container .deck-flip-card-container .flip-card-front{
     font-size: 32px;

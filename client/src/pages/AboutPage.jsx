@@ -1,5 +1,6 @@
 import Card from '../components/Card';
 import '../assets/css/about.css'
+import { Link } from 'react-router-dom';
 export default function AboutPage() {
   const flipCardEx = {
     frontText: 'How does it Work?',
@@ -22,10 +23,14 @@ export default function AboutPage() {
           <h1>
             Boost Your <span>Brain Power</span>
           </h1>
+          <div>
+          <Link style={{textDecoration:'none'}} to={'/newDeck'}><button>Try it out!</button></Link>
+          </div>
         </header>
         <figure className='main-flip-card-container'>
           <Card frontText={flipCardEx.frontText} backText={flipCardEx.backText}/>
         </figure>
+        
       </section>
     </>
   );
