@@ -55,7 +55,7 @@ const createGameUrl = 'http://localhost:4001/createGame';
 
 axios.post(createGameUrl, requestData).then(
   response => {
-    console.log(response);
+    console.log(response.data);
   }
 ).catch(error =>{
   console.error('failed call', error.response.data.error);
