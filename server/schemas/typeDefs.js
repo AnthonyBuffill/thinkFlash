@@ -35,6 +35,7 @@ type Query {
   createCards(title: String!, frontText: String!, backText: String!, cardCount:Int!): String
 }
 type Mutation {
+  createGame(deckId: ID!): String
   addUser(username: String!, email: String!, password: String!): Auth
   login(email: String!, password: String!): Auth
   addDeck(title: String!, description: String!, cardData: String): Deck

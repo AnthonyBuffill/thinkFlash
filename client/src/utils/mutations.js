@@ -79,4 +79,12 @@ export const UPDATE_CARD = gql`
   }
 `;
 
+// export const CREATE_GAME = gql`
+//   mutation createGame($deckId: ID!) {
+//     createGame(deckId: $deckId) {
+
+//     }
+//   }
+// `;
+
 

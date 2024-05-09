@@ -3,6 +3,7 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 const {
   createCards,
 } = require('../controller/openAIController');
+const axios = require('axios');
  
  const resolvers = {
     Query: {
@@ -55,7 +56,23 @@ const {
     }, 
     Mutation: {
       createGame: async (parent, { deckId }) => {
-        return Deck.findOne({ _id: deckId }).populate('cards');
+        const deck = await Deck.findById(deckId).populate('cards');
+        const key = 'I_AM_YOUR_KEY';
+        const requestData = {
+          key, 
+          deck
+        };
+
+        const createGameUrl = 'http://localhost:4001/createGame';
+
+        axios.post(createGameUrl, requestData).then(
+          response => {
+            console.log(response.data);
+          }
+        ).catch(error =>{
+          console.error('failed call', error);
+        });
+        return deck.title;
       },
       addUser: async (parent, { username, email, password }) => {
         const user = await User.create({ username, email, password });
