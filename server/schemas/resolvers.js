@@ -56,6 +56,7 @@ const axios = require('axios');
     }, 
     Mutation: {
       createGame: async (parent, { deckId }) => {
+        console.log(deckId);
         const deck = await Deck.findById(deckId).populate('cards');
         const key = 'I_AM_YOUR_KEY';
         const requestData = {
@@ -73,6 +74,39 @@ const axios = require('axios');
           console.error('failed call', error);
         });
         return deck.title;
+      },
+      createGameWithDeck: async (parent, { title, description, cardData }) => {
+        let cards = [];
+        if(cardData){
+          cards = JSON.parse(cardData);
+        }
+        const deck = {title, description, cards};
+        console.log(deck);
+        // const createdCards = await Card.create(cards);
+        // const cardIds = createdCards.map(card => card._id);
+        // const deck = await Deck.create({ title, description, cards:cardIds });
+        // user.decks.push(deck._id);
+
+
+        const key = 'I_AM_YOUR_KEY';
+        const requestData = {
+          key, 
+          deck
+        };
+
+        const createGameUrl = 'http://localhost:4001/createGame';
+
+        const r = await axios.post(createGameUrl, requestData).then(
+          response => {
+            console.log(response.data);
+            return response.data.data.url;
+          }
+        ).catch(error =>{
+          console.error('failed call', error);
+          return 'error';
+        });
+        console.log(r);
+        return r;
       },
       addUser: async (parent, { username, email, password }) => {
         const user = await User.create({ username, email, password });

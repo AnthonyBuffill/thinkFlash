@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Form from "../components/Form";
 import { QUERY_CREATECARDS } from "../utils/queries";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { ADD_DECK } from "../utils/mutations";
+import { ADD_DECK, CREATE_GAME_WITH_DECK } from "../utils/mutations";
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card'
 import Auth from '../utils/auth';
@@ -10,6 +10,35 @@ import Auth from '../utils/auth';
 export default function NewDeckPage() {
     const navigate = useNavigate();
     const [addDeckMutation, addDeckObj] = useMutation(ADD_DECK);
+    const [createGameMutation, createGameObj] = useMutation(CREATE_GAME_WITH_DECK);
+    const createGame = () =>{
+        if(!flashCards)
+            return;
+        
+        createGameMutation({
+            variables : {
+                title:deckInfo.title,
+                description: deckInfo.description,
+                cardData: JSON.stringify(flashCards)
+            },
+        });
+    }
+    useEffect(()=>{
+        if(!createGameObj.loading){
+            if(createGameObj.data){
+                console.log(createGameObj.data);
+                // const id = addDeckObj.data.addDeck._id;
+                // setState('saving');
+                // window.location.assign(`/deck/${id}/${Auth.getUser()?.data._id}`);
+                const url = createGameObj.data.createGameWithDeck;
+                window.open(url);
+                return;
+            }
+            if(addDeckObj.error){
+                console.log("Error Saving deck");
+            }
+        }
+    }, [createGameObj]);
     const saveDeck = () =>{
         if(!flashCards)
             return;
@@ -144,6 +173,7 @@ export default function NewDeckPage() {
                 {(!loading || !addDeckObj.loading) && (
                     <div className="form-container">
                     <button onClick={saveDeck}>Save Deck</button>
+                    <button onClick={createGame}>Create Game</button>
                     </div>
                 )}
             </>

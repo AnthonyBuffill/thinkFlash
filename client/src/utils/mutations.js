@@ -79,12 +79,16 @@ export const UPDATE_CARD = gql`
   }
 `;
 
-// export const CREATE_GAME = gql`
-//   mutation createGame($deckId: ID!) {
-//     createGame(deckId: $deckId) {
-
-//     }
-//   }
-// `;
-
+export const CREATE_GAME = gql`
+  mutation createGame($deckId: ID!) {
+    createGame(deckId: $deckId){
+      url
+    }
+  }
+`;
+export const CREATE_GAME_WITH_DECK = gql`
+  mutation createGameWithDeck($title: String!, $description: String!, $cardData: String) {
+    createGameWithDeck(title: $title, description: $description, cardData: $cardData)
+  }
+`;
 
